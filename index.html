@@ -3,259 +3,202 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="PawCT: joint note-level SATB transcription and singing voice assignment from mixed choral audio.">
-    <meta property="og:title" content="PawCT · Part-Aware Choral Transcription">
-    <meta property="og:description" content="A research project on joint choral transcription and singing voice assignment.">
+    <meta name="description" content="PawCT transcribes a mixed choir into separate soprano, alto, tenor, and bass note tracks.">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="PawCT · Choral Transcription into Separate SATB Note Tracks">
+    <meta property="og:description" content="Hear how PawCT turns one mixed choral recording into separate soprano, alto, tenor, and bass note tracks.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/">
     <meta property="og:image" content="https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/assets/task-overview.png">
     <link rel="canonical" href="https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/">
     <link rel="stylesheet" href="styles.css">
-    <title>PawCT · Part-Aware Choral Transcription</title>
+    <script src="app.js" defer></script>
+    <title>PawCT · Choral Transcription into Separate SATB Note Tracks</title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="site-header" id="top">
-      <nav class="nav container" aria-label="Primary navigation">
-        <a class="brand" href="#top">PawCT</a>
+    <header class="site-nav">
+      <nav class="page nav-inner" aria-label="Primary navigation">
+        <a class="wordmark" href="#top">PawCT</a>
         <div class="nav-links">
-          <a href="#overview">Overview</a>
-          <a href="#method">Method</a>
+          <a href="#demo">Demo</a>
           <a href="#results">Results</a>
-          <a href="#example">Example</a>
-          <a href="https://github.com/Multimodal-Music-Research-Lab/ICASSP2027_Paw_Choral_AMT">Code</a>
+          <a href="#method">Method</a>
+          <a href="#citation">Citation</a>
         </div>
       </nav>
-
-      <div class="intro container">
-        <p class="venue">Research project · ICASSP 2027</p>
-        <h1>Toward Part-Aware Choral Transcription with Singing Voice Assignment</h1>
-        <p class="authors">Hanyu Meng<sup>1</sup> · Zhanhong He<sup>2</sup> · Zixun Guo<sup>3</sup> · Yaolong Ju<sup>4</sup></p>
-        <p class="affiliations"><sup>1</sup>UNSW · <sup>2</sup>UWA · <sup>3</sup>Queen Mary University of London · <sup>4</sup>Great Bay University</p>
-        <p class="lead">PawCT jointly transcribes soprano, alto, tenor, and bass note events from a single mixed choral recording. The model integrates voice assignment into acoustic transcription instead of treating it as a separate post-processing step.</p>
-        <div class="links" aria-label="Project links">
-          <a class="button primary" href="assets/ICASSP2027_PawCT.pdf">Paper (PDF)</a>
-          <a class="button" href="https://github.com/Multimodal-Music-Research-Lab/ICASSP2027_Paw_Choral_AMT">Implementation</a>
-          <a class="button" href="https://github.com/Hanyu-Meng/ICASSP2027_Paw_Choral_AMT_Demo">Demo source</a>
-        </div>
-      </div>
     </header>
 
     <main id="main">
-      <section class="section container" id="overview">
-        <div class="section-title">
-          <p class="label">Overview</p>
-          <h2>From one mixture to separate SATB tracks</h2>
-        </div>
-        <p class="body-copy">Conventional choral AMT returns one merged note track. PawCT instead identifies the active vocal parts and directly produces separate note-level soprano, alto, tenor, and bass tracks.</p>
+      <article class="page" id="top">
+        <header class="hero">
+          <p class="eyebrow">ICASSP 2027 research project</p>
+          <h1>PawCT: End-to-End Choral Transcription into Separate SATB Note Tracks</h1>
+          <p class="authors">Hanyu Meng<sup>1</sup>, Zhanhong He<sup>2</sup>, Zixun Guo<sup>3</sup>, Yaolong Ju<sup>4</sup></p>
+          <p class="affiliations"><sup>1</sup>UNSW · <sup>2</sup>UWA · <sup>3</sup>Queen Mary University of London · <sup>4</sup>Great Bay University</p>
 
-        <figure class="paper-figure">
-          <a href="assets/task-overview.png" aria-label="Open Figure 1 at full resolution">
-            <img src="assets/task-overview.png" alt="Mixed choral audio is transcribed either by PagCT into one merged note track or by PawCT into separate soprano, alto, tenor, and bass tracks." width="2322" height="761">
-          </a>
-          <figcaption><strong>Figure 1.</strong> Part-agnostic versus part-aware choral transcription.</figcaption>
-        </figure>
+          <p class="link-line"><strong>Links:</strong> [ <a href="assets/ICASSP2027_PawCT.pdf">Paper</a> | <a href="https://github.com/Multimodal-Music-Research-Lab/ICASSP2027_Paw_Choral_AMT">Code</a> | <a href="#citation">Citation</a> ]</p>
 
-        <div class="abstract">
-          <h3>Abstract</h3>
-          <p>Automatic music transcription has advanced for single instruments, but choral systems usually collapse all voices into one track. PawCT is an end-to-end framework for note-level SATB transcription that combines part-specific prediction, part-presence gating, pitch-range priors, ordered continuity, and union-level supervision. On YouChorale, PagCT improves part-agnostic note F1 from 0.237 to 0.382, while PawCT-OC reaches 0.225 mean part-aware note F1.</p>
-        </div>
-      </section>
+          <p class="standfirst">Most choral transcription systems return one merged stream of notes. PawCT identifies which sections are singing and writes a separate MIDI track for <span class="voice s">soprano</span>, <span class="voice a">alto</span>, <span class="voice t">tenor</span>, and <span class="voice b">bass</span>.</p>
+        </header>
 
-      <section class="section section-muted" id="method">
-        <div class="container">
-        <div class="section-title">
-          <p class="label">Method</p>
-          <h2>Joint transcription and voice assignment</h2>
-        </div>
-        <p class="body-copy">A shared CRNN encoder models the mixed recording. Four voice-specific heads estimate note activity for the SATB parts, while union supervision anchors those predictions to the complete note content of the mixture. RP and OC add range-aware and ordering-aware constraints to the same model.</p>
+        <section class="overview" aria-labelledby="overview-title">
+          <h2 id="overview-title" class="section-heading">From one choir recording to four usable parts</h2>
+          <figure class="hero-figure">
+            <a href="assets/task-overview.png" aria-label="Open the task overview at full resolution">
+              <img src="assets/task-overview.png" alt="A mixed choir is transcribed either into one merged note track or into separate soprano, alto, tenor, and bass tracks." width="2322" height="761">
+            </a>
+            <figcaption>Conventional choral AMT merges every voice. PawCT preserves the SATB structure needed for rehearsal, education, and score reconstruction.</figcaption>
+          </figure>
 
-        <figure class="paper-figure method-figure">
-          <a href="assets/method-overview.png" aria-label="Open Figure 2 at full resolution">
-            <img src="assets/method-overview.png" alt="Architecture overview of PawCT, PagCT, and the two-stage Post-VA system." width="5059" height="1553" loading="lazy" decoding="async">
-          </a>
-          <figcaption><strong>Figure 2.</strong> PawCT predicts SATB events end to end; PagCT produces a global MIDI track; Post-VA assigns decoded PagCT notes with a symbolic BiLSTM.</figcaption>
-        </figure>
-
-        <dl class="terms">
-          <div><dt>PagCT</dt><dd>Part-agnostic transcription of the mixed choir.</dd></div>
-          <div><dt>Post-VA</dt><dd>Voice assignment applied after acoustic transcription.</dd></div>
-          <div><dt>PawCT</dt><dd>Part-aware transcription learned jointly from the audio.</dd></div>
-        </dl>
-        </div>
-      </section>
-
-      <section class="section" id="results">
-        <div class="container">
-          <div class="section-title">
-            <p class="label">Results</p>
-            <h2>Transcription results on YouChorale</h2>
+          <div class="abstract-copy">
+            <h2>Abstract</h2>
+            <p>Single-instrument automatic music transcription (AMT) has advanced substantially, yet a single instrument can contain functionally distinct musical parts that must be separated for practical use. This limitation is particularly consequential in choral music, where a part is a distinct vocal line sung by a voice section, conventionally soprano, alto, tenor, or bass (SATB). Existing choral AMT systems instead produce a single merged note track, limiting rehearsal, education, and score reconstruction. We introduce Part-aware Choral Transcription (PawCT), the first end-to-end framework to identify active SATB parts and transcribe each into a separate note-level MIDI track. PawCT combines part-specific prediction and presence gating with pitch-range and ordered-continuity priors and union-level supervision. On YouChorale, PawCT-OC achieves an average part-aware note F1 of 0.225, a 36.36% relative improvement over an adapted choral baseline. Its part-agnostic counterpart, PagCT, achieves a note F1 of 0.382, improving over the previous state of the art by 61.18%. These results suggest that jointly modeling transcription and part assignment is more effective than post-hoc assignment.</p>
           </div>
-          <p class="body-copy">PagCT improves part-agnostic note transcription, while PawCT-OC gives the strongest mean SATB note F1 among the evaluated part-aware systems and transfers better than the two-stage baseline. The complete manuscript tables are reproduced below.</p>
+        </section>
 
-          <article class="result-block">
-            <div class="result-heading">
-              <h3>Part-agnostic transcription</h3>
-              <p>Single-track results on the YouChorale test set.</p>
-            </div>
-            <div class="table-wrap wide">
-              <table>
-                <caption>Table 1. Part-agnostic single-track transcription results.</caption>
-                <thead>
-                  <tr>
-                    <th scope="col" rowspan="2">Model</th>
-                    <th scope="colgroup" colspan="3">Frame</th>
-                    <th scope="colgroup" colspan="3">Onset (50 ms)</th>
-                    <th scope="colgroup" colspan="3">Onset (100 ms)</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">P</th><th scope="col">R</th><th scope="col">F1</th>
-                    <th scope="col">P</th><th scope="col">R</th><th scope="col">F1</th>
-                    <th scope="col">P</th><th scope="col">R</th><th scope="col">F1</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><th scope="row">Onsets and Frames</th><td><strong>0.806</strong></td><td>0.326</td><td>0.428</td><td><strong>0.450</strong></td><td>0.178</td><td>0.242</td><td><strong>0.688</strong></td><td>0.248</td><td>0.344</td></tr>
-                  <tr><th scope="row">MT3</th><td>0.590</td><td>0.243</td><td>0.344</td><td>0.117</td><td>0.148</td><td>0.127</td><td>0.200</td><td>0.255</td><td>0.217</td></tr>
-                  <tr><th scope="row">YourMT3+</th><td>0.529</td><td>0.423</td><td>0.457</td><td>0.145</td><td>0.119</td><td>0.127</td><td>0.252</td><td>0.207</td><td>0.221</td></tr>
-                  <tr><th scope="row">Yu et al.</th><td>0.678</td><td>0.619</td><td>0.647</td><td>0.251</td><td>0.232</td><td>0.237</td><td>0.366</td><td>0.341</td><td>0.347</td></tr>
-                  <tr><th scope="row">PagCT w/o Aug.</th><td><u>0.690</u></td><td><u>0.833</u></td><td><strong>0.751</strong></td><td>0.346</td><td>0.329</td><td>0.333</td><td>0.539</td><td>0.506</td><td>0.516</td></tr>
-                  <tr class="highlight"><th scope="row">PagCT (Proposed)</th><td>0.626</td><td><strong>0.909</strong></td><td><u>0.738</u></td><td><u>0.398</u></td><td><strong>0.378</strong></td><td><strong>0.382</strong></td><td><u>0.597</u></td><td><strong>0.569</strong></td><td><strong>0.573</strong></td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="note">“w/o Aug.” denotes training without pitch-transposition augmentation.</p>
-          </article>
-
-          <article class="result-block">
-            <div class="result-heading">
-              <h3>Part-aware transcription</h3>
-              <p>Frame F1 and note F1 for each SATB part, their mean, and voice-assignment retention rate.</p>
-            </div>
-            <div class="table-wrap extra-wide">
-              <table>
-                <caption>Table 2. Part-aware frame-level and note-level transcription results.</caption>
-              <thead>
-                <tr>
-                  <th scope="col" rowspan="2">Model</th>
-                  <th scope="colgroup" colspan="2">Soprano</th>
-                  <th scope="colgroup" colspan="2">Alto</th>
-                  <th scope="colgroup" colspan="2">Tenor</th>
-                  <th scope="colgroup" colspan="2">Bass</th>
-                  <th scope="colgroup" colspan="2">Average</th>
-                  <th scope="colgroup" colspan="2">VA Rate (%)</th>
-                </tr>
-                <tr>
-                  <th scope="col">Fr.</th><th scope="col">Nt.</th>
-                  <th scope="col">Fr.</th><th scope="col">Nt.</th>
-                  <th scope="col">Fr.</th><th scope="col">Nt.</th>
-                  <th scope="col">Fr.</th><th scope="col">Nt.</th>
-                  <th scope="col">Fr.</th><th scope="col">Nt.</th>
-                  <th scope="col">Fr.</th><th scope="col">Nt.</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="group-row"><th colspan="13" scope="rowgroup">End-to-end settings</th></tr>
-                <tr><th scope="row">YourMT3+<sup>★</sup></th><td>0.371</td><td>0.083</td><td>0.297</td><td>0.068</td><td>0.294</td><td>0.073</td><td>0.371</td><td>0.093</td><td>0.333</td><td>0.079</td><td>72.87</td><td>62.20</td></tr>
-                <tr><th scope="row">Yu et al.<sup>★</sup></th><td>0.528</td><td>0.183</td><td><u>0.451</u></td><td>0.151</td><td>0.436</td><td>0.138</td><td>0.560</td><td>0.186</td><td>0.494</td><td>0.165</td><td>76.35</td><td>69.62</td></tr>
-                <tr><th scope="row">PawCT w/o union-loss</th><td>0.417</td><td>0.192</td><td>0.338</td><td>0.169</td><td>0.343</td><td>0.178</td><td>0.419</td><td>0.222</td><td>0.379</td><td>0.190</td><td>51.36</td><td>49.74</td></tr>
-                <tr><th scope="row">PawCT</th><td>0.530</td><td><u>0.228</u></td><td>0.430</td><td><u>0.191</u></td><td>0.429</td><td><u>0.197</u></td><td>0.552</td><td><u>0.252</u></td><td>0.458</td><td><u>0.217</u></td><td>62.06</td><td>56.81</td></tr>
-                <tr><th scope="row">PawCT-RP</th><td><strong>0.542</strong></td><td>0.210</td><td><strong>0.453</strong></td><td>0.185</td><td><strong>0.458</strong></td><td>0.194</td><td><strong>0.585</strong></td><td>0.247</td><td><strong>0.510</strong></td><td>0.209</td><td>69.11</td><td>54.71</td></tr>
-                <tr class="highlight"><th scope="row">PawCT-OC (Proposed)</th><td><u>0.535</u></td><td><strong>0.231</strong></td><td>0.447</td><td><strong>0.197</strong></td><td><u>0.451</u></td><td><strong>0.208</strong></td><td><u>0.578</u></td><td><strong>0.264</strong></td><td><u>0.503</u></td><td><strong>0.225</strong></td><td>68.16</td><td>58.90</td></tr>
-                <tr class="group-row"><th colspan="13" scope="rowgroup">Two-stage settings</th></tr>
-                <tr><th scope="row">PagCT + Post-VA</th><td>0.501</td><td>0.180</td><td>0.439</td><td>0.145</td><td>0.447</td><td>0.156</td><td>0.568</td><td>0.219</td><td>0.489</td><td>0.175</td><td>66.26</td><td>45.81</td></tr>
-              </tbody>
-            </table>
+        <section class="section" id="results" aria-labelledby="results-title">
+          <h2 id="results-title" class="section-heading">Performance at a glance</h2>
+          <div class="metrics" aria-label="Headline results">
+            <article class="metric">
+              <strong>0.382</strong>
+              <span>single-track note F1</span>
+              <small>+61.18% over the previous state of the art</small>
+            </article>
+            <article class="metric">
+              <strong>0.225</strong>
+              <span>average SATB note F1</span>
+              <small>+36.36% over the adapted choral baseline</small>
+            </article>
+            <article class="metric">
+              <strong>0.313</strong>
+              <span>zero-shot note F1 on Cantoría</span>
+              <small>2.72× the two-stage assignment baseline</small>
+            </article>
           </div>
-            <p class="note">Note results use onset F1 with a 50 ms tolerance; all systems use pitch-transposition augmentation. ★ denotes baselines adapted for part-aware transcription. VA Rate = F1<sub>average</sub> / F1<sub>part-agnostic</sub> × 100%. Bold and underline follow the manuscript's best and second-best emphasis.</p>
-          </article>
 
-          <article class="result-block">
-            <div class="result-heading">
-              <h3>Zero-shot generalisation</h3>
-              <p>Models are trained only on YouChorale and evaluated without fine-tuning.</p>
+          <div class="result-plots">
+            <figure class="bar-figure">
+              <figcaption><strong>Single-track transcription</strong><span>Note F1 · YouChorale</span></figcaption>
+              <div class="bar-row"><span>Previous SOTA</span><i style="--value: 62%"></i><b>0.237</b></div>
+              <div class="bar-row ours"><span>PagCT</span><i style="--value: 100%"></i><b>0.382</b></div>
+            </figure>
+            <figure class="bar-figure">
+              <figcaption><strong>Separate SATB transcription</strong><span>Average note F1 · YouChorale</span></figcaption>
+              <div class="bar-row"><span>Adapted choral model</span><i style="--value: 73%"></i><b>0.165</b></div>
+              <div class="bar-row"><span>Post-hoc assignment</span><i style="--value: 78%"></i><b>0.175</b></div>
+              <div class="bar-row ours"><span>PawCT-OC</span><i style="--value: 100%"></i><b>0.225</b></div>
+            </figure>
+          </div>
+          <p class="fine-print">Note F1 uses a 50 ms onset tolerance. Full per-part, frame-level, and zero-shot results are reported in the <a href="assets/ICASSP2027_PawCT.pdf">paper</a>.</p>
+        </section>
+
+        <section class="section demo-section" id="demo" aria-labelledby="demo-title">
+          <h2 id="demo-title" class="section-heading">Listen to the transcription</h2>
+          <p class="section-intro">This 35-second excerpt of <em>Exsultate Deo</em> shows the central difference: PagCT returns one merged note stream, while PawCT returns four independently playable vocal parts.</p>
+
+          <div class="source-row">
+            <div>
+              <strong>Original recording</strong>
+              <span>Palestrina · 00:10–00:45</span>
             </div>
-            <div class="table-wrap compact-table">
-              <table>
-                <caption>Table 3. Part-aware note F1 at 50 ms onset tolerance on CSD and Cantoría.</caption>
-                <thead>
-                  <tr><th scope="col">Dataset</th><th scope="col">Model</th><th scope="col">S</th><th scope="col">A</th><th scope="col">T</th><th scope="col">B</th><th scope="col">Average</th></tr>
-                </thead>
-                <tbody>
-                  <tr><th scope="row" rowspan="3">CSD</th><th scope="row">PagCT + Post-VA</th><td>0.073</td><td>0.122</td><td>0.131</td><td>0.143</td><td>0.118</td></tr>
-                  <tr><th scope="row">PawCT</th><td>0.140</td><td>0.175</td><td>0.183</td><td><strong>0.145</strong></td><td>0.172</td></tr>
-                  <tr class="highlight"><th scope="row">PawCT-OC</th><td><strong>0.145</strong></td><td><strong>0.223</strong></td><td><strong>0.199</strong></td><td>0.130</td><td><strong>0.174</strong></td></tr>
-                  <tr class="dataset-start"><th scope="row" rowspan="3">Cantoría</th><th scope="row">PagCT + Post-VA</th><td>0.179</td><td>0.115</td><td>0.085</td><td>0.084</td><td>0.115</td></tr>
-                  <tr><th scope="row">PawCT</th><td>0.240</td><td>0.239</td><td>0.275</td><td>0.328</td><td>0.271</td></tr>
-                  <tr class="highlight"><th scope="row">PawCT-OC</th><td><strong>0.329</strong></td><td><strong>0.273</strong></td><td><strong>0.300</strong></td><td><strong>0.348</strong></td><td><strong>0.313</strong></td></tr>
-                </tbody>
-              </table>
+            <a class="source-link" href="https://www.youtube.com/watch?v=jd2_r4PK5dc&amp;t=10s" target="_blank" rel="noopener noreferrer">Listen on YouTube <span aria-hidden="true">↗</span></a>
+          </div>
+
+          <p class="demo-status" id="demo-status" role="status">Loading the model outputs…</p>
+
+          <div class="listening-block">
+            <div class="listening-heading">
+              <div><span class="number">1</span><h3>Merged transcription</h3></div>
+              <p>All detected notes share one track.</p>
             </div>
-          </article>
-
-          <p class="results-status">These values are reported in the manuscript and have not yet been regenerated from this public repository snapshot.</p>
-        </div>
-      </section>
-
-      <section class="section container" id="example">
-        <div class="section-title">
-          <p class="label">Qualitative example</p>
-          <h2>Transcription of <em>Exsultate Deo</em></h2>
-        </div>
-        <p class="body-copy">The figure compares the ground truth with PawCT-OC, part-agnostic PagCT, and the two-stage PagCT + Post-VA baseline. Color denotes the assigned choral part.</p>
-
-        <div class="media-card">
-          <a class="source-player" href="https://www.youtube.com/watch?v=jd2_r4PK5dc&amp;t=10s" target="_blank" rel="noopener noreferrer" aria-label="Listen to the Exsultate Deo source recording on YouTube, starting at 10 seconds">
-            <span class="play-mark" aria-hidden="true">▶</span>
-            <span class="player-copy">
-              <strong>Listen to the source recording</strong>
-              <small>Opens on YouTube at 00:10</small>
-            </span>
-          </a>
-          <div class="media-copy">
-            <p class="label">Corresponding audio</p>
-            <h3><em>Exsultate Deo</em> · Palestrina</h3>
-            <p>The linked recording opens at the beginning of the 10–100 s passage visualised below. Recording ID: <code>jd2_r4PK5dc</code>.</p>
-            <p class="source-note">The recording remains hosted by its <a href="https://www.youtube.com/watch?v=jd2_r4PK5dc&amp;t=10s" target="_blank" rel="noopener noreferrer">original YouTube source</a>; no YouChorale audio file is stored or redistributed by this repository.</p>
+            <article class="player-row pagct-row">
+              <div class="player-label"><strong>PagCT</strong><small>Single note track</small></div>
+              <button class="play-button" type="button" data-model="pagct" data-voice="all" aria-label="Play the PagCT merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
+              <canvas class="piano-roll" data-model="pagct" data-voice="all" aria-label="Piano roll for the PagCT merged transcription"></canvas>
+            </article>
           </div>
-        </div>
 
-        <figure class="comparison">
-          <a href="assets/exsultate-deo-four-panel.png" aria-label="Open the full-resolution transcription comparison">
-            <img src="assets/exsultate-deo-four-panel.png" alt="Four piano-roll panels comparing ground truth, PawCT-OC, PagCT, and PagCT plus Post-VA for Exsultate Deo." width="3240" height="1152" loading="lazy" decoding="async">
-          </a>
-          <figcaption>
-            <span>Exsultate Deo · 10–100 s</span>
-            <span class="legend" aria-label="Voice colors">
-              <i class="s"></i>Soprano
-              <i class="a"></i>Alto
-              <i class="t"></i>Tenor
-              <i class="b"></i>Bass
-              <i class="g"></i>Part-agnostic
-            </span>
-          </figcaption>
-        </figure>
-      </section>
+          <div class="listening-block parts-block">
+            <div class="listening-heading">
+              <div><span class="number">2</span><h3>Separate vocal parts</h3></div>
+              <p>Play each PawCT output on its own, or compare it with post-hoc assignment.</p>
+            </div>
+            <div class="comparison-head" aria-hidden="true"><span>Vocal part</span><span>PawCT · joint</span><span>Post-VA · two-stage</span></div>
 
-      <section class="section section-muted compact">
-        <div class="container reproducibility">
-          <div>
-            <p class="label">Reproducibility</p>
-            <h2>Release status</h2>
+            <article class="part-row" data-part="S">
+              <div class="part-name"><i></i><strong>Soprano</strong><small>S</small></div>
+              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="S" aria-label="Play the PawCT soprano track" disabled><span aria-hidden="true">▶</span><em>Play PawCT soprano</em></button><canvas class="piano-roll" data-model="pawct" data-voice="S" aria-label="Piano roll for the PawCT soprano track"></canvas></div>
+              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="S" aria-label="Play the post-hoc soprano track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc soprano</em></button><canvas class="piano-roll" data-model="postva" data-voice="S" aria-label="Piano roll for the post-hoc soprano track"></canvas></div>
+            </article>
+            <article class="part-row" data-part="A">
+              <div class="part-name"><i></i><strong>Alto</strong><small>A</small></div>
+              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="A" aria-label="Play the PawCT alto track" disabled><span aria-hidden="true">▶</span><em>Play PawCT alto</em></button><canvas class="piano-roll" data-model="pawct" data-voice="A" aria-label="Piano roll for the PawCT alto track"></canvas></div>
+              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="A" aria-label="Play the post-hoc alto track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc alto</em></button><canvas class="piano-roll" data-model="postva" data-voice="A" aria-label="Piano roll for the post-hoc alto track"></canvas></div>
+            </article>
+            <article class="part-row" data-part="T">
+              <div class="part-name"><i></i><strong>Tenor</strong><small>T</small></div>
+              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="T" aria-label="Play the PawCT tenor track" disabled><span aria-hidden="true">▶</span><em>Play PawCT tenor</em></button><canvas class="piano-roll" data-model="pawct" data-voice="T" aria-label="Piano roll for the PawCT tenor track"></canvas></div>
+              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="T" aria-label="Play the post-hoc tenor track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc tenor</em></button><canvas class="piano-roll" data-model="postva" data-voice="T" aria-label="Piano roll for the post-hoc tenor track"></canvas></div>
+            </article>
+            <article class="part-row" data-part="B">
+              <div class="part-name"><i></i><strong>Bass</strong><small>B</small></div>
+              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="B" aria-label="Play the PawCT bass track" disabled><span aria-hidden="true">▶</span><em>Play PawCT bass</em></button><canvas class="piano-roll" data-model="pawct" data-voice="B" aria-label="Piano roll for the PawCT bass track"></canvas></div>
+              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="B" aria-label="Play the post-hoc bass track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc bass</em></button><canvas class="piano-roll" data-model="postva" data-voice="B" aria-label="Piano roll for the post-hoc bass track"></canvas></div>
+            </article>
           </div>
-          <div>
-            <p>The corresponding recording is linked at its original YouTube source. This repository does not redistribute YouChorale audio, annotations, MIDI, checkpoints, or probability files. Exact experiment provenance is being frozen alongside the implementation.</p>
-            <p class="resource-links"><a href="REPRODUCIBILITY.md">Audit</a><a href="PROVENANCE.md">Provenance</a><a href="CODE_WALKTHROUGH.md">Code walkthrough</a></p>
+
+          <p class="demo-note">The players synthesize model-predicted notes in your browser using a neutral tone. Only one player runs at a time. No source audio or reference annotation is stored on this site.</p>
+
+          <details class="visual-comparison">
+            <summary>View the full piano-roll comparison</summary>
+            <figure>
+              <a href="assets/exsultate-deo-four-panel.png" aria-label="Open the full-resolution transcription comparison">
+                <img src="assets/exsultate-deo-four-panel.png" alt="Ground truth, PawCT, PagCT, and PagCT plus Post-VA piano rolls for Exsultate Deo." width="3240" height="1152">
+              </a>
+              <figcaption>Ground truth and model outputs for the 10–100 second passage. Color denotes the assigned SATB part.</figcaption>
+            </figure>
+          </details>
+        </section>
+
+        <section class="section" id="method" aria-labelledby="method-title">
+          <h2 id="method-title" class="section-heading">How PawCT keeps the parts separate</h2>
+          <p class="section-intro">PawCT detects notes and assigns them to vocal parts in one model. A global training signal keeps the complete pitch content intact, while pitch range and melodic continuity help maintain consistent SATB lines.</p>
+          <figure class="method-figure">
+            <a href="assets/method-overview.png" aria-label="Open the method diagram at full resolution">
+              <img src="assets/method-overview.png" alt="PawCT predicts separate SATB note events directly, while the comparison systems produce one merged track or assign parts after transcription." width="5059" height="1553">
+            </a>
+            <figcaption>PawCT predicts SATB notes directly from the mixed recording. The two-stage alternative first transcribes a merged track and assigns parts afterwards.</figcaption>
+          </figure>
+
+          <div class="method-points">
+            <article><span>01</span><h3>Find the notes</h3><p>A shared audio encoder captures the complete musical content of the choir.</p></article>
+            <article><span>02</span><h3>Follow each line</h3><p>Separate output heads use vocal range and melodic continuity to preserve SATB structure.</p></article>
+            <article><span>03</span><h3>Export the parts</h3><p>Active soprano, alto, tenor, and bass sections are returned as independent note tracks.</p></article>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section class="section citation-section" id="citation" aria-labelledby="citation-title">
+          <div class="citation-heading">
+            <h2 id="citation-title" class="section-heading">Citation</h2>
+            <button class="copy-button" type="button" data-copy-citation>Copy BibTeX</button>
+          </div>
+          <pre id="bibtex"><code>@inproceedings{meng2027pawct,
+  title     = {PawCT: End-to-End Choral Transcription into Separate SATB Note Tracks},
+  author    = {Meng, Hanyu and He, Zhanhong and Guo, Zixun and Ju, Yaolong},
+  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2027}
+}</code></pre>
+          <p class="citation-note">Publication metadata will be updated when the proceedings record is available.</p>
+        </section>
+      </article>
     </main>
 
     <footer>
-      <div class="container footer-inner">
+      <div class="page footer-inner">
         <span>© 2026 Hanyu Meng</span>
-        <a href="https://github.com/Hanyu-Meng">GitHub</a>
+        <span><a href="https://github.com/Hanyu-Meng/ICASSP2027_Paw_Choral_AMT_Demo">Demo source</a> · <a href="REPRODUCIBILITY.md">Reproducibility</a> · <a href="PROVENANCE.md">Provenance</a></span>
       </div>
     </footer>
   </body>

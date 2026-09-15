@@ -34,6 +34,19 @@
       "sha256": "6972c0d83fc658b7db6ba53d93eca98f2eabf0a73f6ded7554da80adee81f931",
       "kind": "manuscript PDF",
       "license": "Author-owned manuscript; not included under the repository's Apache-2.0 source license"
+    },
+    {
+      "path": "exsultate-deo-demo.json",
+      "sha256": "9e5a7e169456f24b6e1813f100c82497d6d752ee4a7acff1257446b815f97fc3",
+      "kind": "derived interactive demo data",
+      "creator": "Hanyu Meng",
+      "copyright": "Copyright 2026 Hanyu Meng",
+      "license": "All rights reserved; not included under the repository's Apache-2.0 source license",
+      "source_work": "Exsultate Deo",
+      "recording_id": "jd2_r4PK5dc",
+      "displayed_excerpt_seconds": [10, 45],
+      "contents": "Cached PawCT, PagCT, and Post-VA predicted note events only",
+      "rights_note": "No source audio, reference MIDI, annotation, checkpoint, or probability file is included. The browser synthesizes the predicted notes locally."
     }
   ],
   "external_media": [

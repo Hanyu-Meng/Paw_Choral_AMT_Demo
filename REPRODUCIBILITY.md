@@ -15,6 +15,8 @@ and the manuscript's tables have not been rerun.
 - [x] Manuscript qualitative-figure generation path and matching example identifier.
 - [x] Qualitative example source recording linked to the official YouChorale metadata and
       opened from its original host without redistributing an audio file.
+- [x] Browser-synthesized listening example derived from cached model-predicted
+      notes only, without publishing reference annotations or source audio.
 - [x] Validation/test probability separation and validation-default threshold search.
 - [x] Public paths, declared dependencies, upstream attribution, and release scan.
 - [x] Data-free PawCT forward/union/loss-backward smoke test.

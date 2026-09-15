@@ -1,16 +1,15 @@
 # PawCT project page
 
-Public project page for **“Toward Part-Aware Choral Transcription with
-Singing Voice Assignment.”**
+Public project page for **“PawCT: End-to-End Choral Transcription into
+Separate SATB Note Tracks.”**
 
 **Live demo:**
 [https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/](https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/)
 
 PawCT transcribes one mixed choral recording into note-level soprano, alto,
-tenor, and bass parts. This dependency-free academic project page presents the
-method, complete manuscript-reported result tables, the paper's qualitative
-comparison, the manuscript figures, and a link to its corresponding source
-recording.
+tenor, and bass parts. This dependency-free academic project page presents a
+concise paper summary, headline results, manuscript figures, and an interactive
+listening comparison rendered from cached model predictions.
 
 ## Scientific status
 
@@ -21,10 +20,11 @@ access-controlled while its experiment provenance is being frozen.
 
 ## Contents
 
-- `index.html` and `styles.css`: the static project page;
+- `index.html`, `styles.css`, and `app.js`: the static project page and browser-based note synthesizer;
 - `assets/ICASSP2027_PawCT.pdf`: the current manuscript PDF;
 - `assets/task-overview.png` and `assets/method-overview.png`: manuscript Figures 1 and 2;
 - `assets/exsultate-deo-four-panel.png`: the qualitative piano-roll comparison;
+- `assets/exsultate-deo-demo.json`: a 35-second excerpt of cached PawCT, PagCT, and Post-VA model predictions;
 - `assets/manifest.json`: asset provenance and rights notes;
 - `CODE_WALKTHROUGH.md`: English method and code walkthrough;
 - `CODE_WALKTHROUGH.zh-CN.md`: concise Chinese walkthrough;
