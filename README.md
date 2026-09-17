@@ -9,7 +9,7 @@ Separate SATB Note Tracks.”**
 PawCT transcribes one mixed choral recording into note-level soprano, alto,
 tenor, and bass parts. This dependency-free academic project page presents a
 concise paper summary, headline results, manuscript figures, and an interactive
-listening comparison rendered from cached model predictions. The original
+listening comparison rendered from a short ground-truth excerpt and cached model predictions. The original
 35-second recording excerpt is presented in an on-page waveform player, so
 visitors do not need to leave the demo to hear it.
 
@@ -27,6 +27,7 @@ access-controlled while its experiment provenance is being frozen.
 - `assets/task-overview.png` and `assets/method-overview.png`: manuscript Figures 1 and 2;
 - `assets/exsultate-deo-four-panel.png`: the qualitative piano-roll comparison;
 - `assets/exsultate-deo-demo.json`: a 35-second excerpt of cached PawCT, PagCT, Post-VA, MuScriptor-medium, and Yu et al. model predictions;
+- `assets/exsultate-deo-reference.json`: the matching 35-second part-agnostic union of the official SATB reference annotations;
 - `assets/audio/exsultate-deo-10s-45s.mp3`: the matching 35-second source-recording excerpt;
 - `assets/audio/exsultate-deo-waveform.json`: normalized peaks used by the interactive waveform;
 - `assets/analysis/`: aggregate, recording-level, symbolic, onset-error, and ablation analyses;
@@ -37,11 +38,12 @@ access-controlled while its experiment provenance is being frozen.
 - `CODE_WALKTHROUGH.zh-CN.md`: concise Chinese walkthrough;
 - `REPRODUCIBILITY.md` and `PROVENANCE.md`: release caveats and source audit.
 
-The site distributes one 35-second YouChorale recording excerpt for scholarly
-comparison and links its original provider for attribution. It does not
-distribute the full recording, source MIDI, annotations, model checkpoints, or
-probability files. See `assets/manifest.json` for the excerpt's provenance and
-rights note.
+The site distributes one 35-second YouChorale recording excerpt and a
+mechanically derived part-agnostic reference excerpt for scholarly comparison,
+and links the recording's original provider for attribution. It does not
+distribute the full recording, source MIDI, full annotation files, model
+checkpoints, or probability files. See `assets/manifest.json` for provenance
+and rights notes.
 
 ## Local preview
 

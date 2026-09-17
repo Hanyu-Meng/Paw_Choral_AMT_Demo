@@ -203,7 +203,7 @@
 
         <section class="section demo-section" id="demo" aria-labelledby="demo-title">
           <h2 id="demo-title" class="section-heading">Listen to the transcription</h2>
-          <p class="section-intro">This 35-second excerpt of <em>Exsultate Deo</em> lets you compare merged predictions from PagCT, MuScriptor-medium, and Yu et al. PawCT additionally returns four independently playable vocal parts.</p>
+          <p class="section-intro">This 35-second excerpt of <em>Exsultate Deo</em> lets you compare the part-agnostic ground truth with merged predictions from PagCT, MuScriptor-medium, and Yu et al. PawCT additionally returns four independently playable vocal parts.</p>
 
           <div class="waveform-player" data-waveform-player>
             <div class="waveform-copy">
@@ -231,13 +231,18 @@
             </div>
           </div>
 
-          <p class="demo-status" id="demo-status" role="status">Loading the model outputs…</p>
+          <p class="demo-status" id="demo-status" role="status">Loading the reference and model outputs…</p>
 
           <div class="listening-block">
             <div class="listening-heading">
               <div><span class="number">1</span><h3>Merged transcription</h3></div>
-              <p>All detected notes share one track.</p>
+              <p>All annotated or detected notes share one track.</p>
             </div>
+            <article class="player-row">
+              <div class="player-label"><strong>Ground truth</strong><small>Reference · merged note track</small></div>
+              <button class="play-button" type="button" data-model="reference" data-voice="all" aria-label="Play the ground-truth reference merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
+              <canvas class="piano-roll" data-model="reference" data-voice="all" aria-label="Piano roll for the ground-truth reference merged transcription"></canvas>
+            </article>
             <article class="player-row pagct-row">
               <div class="player-label"><strong>PagCT</strong><small>Single note track</small></div>
               <button class="play-button" type="button" data-model="pagct" data-voice="all" aria-label="Play the PagCT merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
@@ -284,7 +289,7 @@
             </article>
           </div>
 
-          <p class="demo-note">The original excerpt is played directly from this page. Every transcription player uses predictions for the same 00:10–00:45 passage and synthesizes them in your browser with the same piano-like timbre. MuScriptor-medium is evaluated zero-shot; the Yu et al. row is a newly generated full-song inference from the frozen checkpoint associated with the reported baseline, not a historical per-song artifact. Only one player runs at a time; no reference annotation, checkpoint, or probability array is distributed.</p>
+          <p class="demo-note">The original excerpt is played directly from this page. The ground-truth row is the canonical part-agnostic union of the official SATB annotations for the same 00:10–00:45 passage; every reference or prediction row is synthesized in your browser with the same piano-like timbre. MuScriptor-medium is evaluated zero-shot; the Yu et al. row is a newly generated full-song inference from the frozen checkpoint associated with the reported baseline, not a historical per-song artifact. Only one player runs at a time; no source MIDI, full annotation file, checkpoint, or probability array is distributed.</p>
 
           <details class="visual-comparison">
             <summary>View the full piano-roll comparison</summary>

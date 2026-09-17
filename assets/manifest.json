@@ -66,7 +66,28 @@
           "excerpt_event_sha256": "d0eb258196e1da621d6e7b7284343c871afa605a5bd747841453c092ad1c7f11"
         }
       },
-      "rights_note": "No source audio, reference MIDI, annotation, checkpoint, or probability file is included. The browser synthesizes the predicted notes locally."
+      "rights_note": "This prediction-only asset includes no source audio, reference MIDI, annotation, checkpoint, or probability file. The browser synthesizes the predicted notes locally."
+    },
+    {
+      "path": "exsultate-deo-reference.json",
+      "sha256": "70dd1f6539a830b3f783787aee0ae22f8287695faaddee2f2895842be165600c",
+      "kind": "mechanically derived interactive reference excerpt",
+      "source_work": "Exsultate Deo",
+      "recording_id": "jd2_r4PK5dc",
+      "displayed_excerpt_seconds": [10, 45],
+      "contents": "Part-agnostic canonical union of the official SATB note annotations for the displayed excerpt",
+      "track_event_counts": {
+        "reference_merged": 244
+      },
+      "reference_provenance": {
+        "source_annotation_sha256": "d5dc8519ba70ba91f5c0e21e5eb8f65e56692da0d621e63848be56179b0a937e",
+        "source_commit": "998f8f9255cc62066298ea981db57d766b5404cf",
+        "duration_policy": "clip_offsets_drop_unobservable_onsets_v1",
+        "union_policy": "formal_part_name_to_canonical_union_100hz_v1",
+        "excerpt_event_sha256": "8c23759d20d602b2de75a35782c044a448ace84683877bde6e59428cbc776aff"
+      },
+      "license": "Not included under the repository's Apache-2.0 source license",
+      "rights_note": "A short mechanically derived reference excerpt is presented for scholarly comparison. The source annotation pickle and source MIDI are not distributed; rights in the underlying dataset and annotation remain with their respective holders."
     },
     {
       "path": "audio/exsultate-deo-10s-45s.mp3",

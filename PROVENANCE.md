@@ -8,16 +8,24 @@
   `46747902ae576b79ca3ec25e50cf2e2955aec66892a2ef2c8643012ce133dbc5`.
 - Interactive demo data SHA-256:
   `40b3e4f24b55aea60bbede1b9be978d41eb1705a4a4767a78cdb5ff2de4ae217`.
+- Part-agnostic reference excerpt SHA-256:
+  `70dd1f6539a830b3f783787aee0ae22f8287695faaddee2f2895842be165600c`.
 - Original-recording excerpt SHA-256:
   `8da42a2d08a9df1d125ee57dd7daf1aba76b6453fc14b15fbb3dfe7e15298642`.
 - Source recording SHA-256 before excerpt encoding:
   `73212f1fc740d61cf9a3ad245d69793665ed99daaabe282ccc1e0be45795d6ac`.
 - Waveform peak data SHA-256:
   `44cddfc8f311a5b165d8db9ad0c8a340eb1a623a0fa034253bc2a3712729a6f8`.
-- Interactive excerpt: cached PawCT, PagCT, Post-VA, MuScriptor-medium, and
-  Yu et al. model predictions for `jd2_r4PK5dc`, cropped to 10–45 seconds.
+- Interactive excerpt: the canonical part-agnostic reference plus cached
+  PawCT, PagCT, Post-VA, MuScriptor-medium, and Yu et al. model predictions for
+  `jd2_r4PK5dc`, cropped to 10–45 seconds. The reference contains 244 events
+  derived by applying `clip_offsets_drop_unobservable_onsets_v1` and the
+  100-Hz canonical-union policy to the trusted annotation (source annotation
+  SHA-256 `d5dc8519ba70ba91f5c0e21e5eb8f65e56692da0d621e63848be56179b0a937e`;
+  canonical excerpt-event SHA-256
+  `8c23759d20d602b2de75a35782c044a448ace84683877bde6e59428cbc776aff`).
   The page includes the matching 35-second source-recording excerpt and a
-  derived waveform. It contains no reference MIDI, reference annotations,
+  derived waveform. It contains no source MIDI, full annotation file,
   checkpoints, or probability arrays.
 - MuScriptor-medium contributes 240 excerpt events. They were mechanically
   cropped from the audited 890-note zero-shot prediction artifact (artifact

@@ -276,14 +276,28 @@
 
   async function loadDemo() {
     try {
-      const response = await fetch("assets/exsultate-deo-demo.json");
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const [response, referenceResponse] = await Promise.all([
+        fetch("assets/exsultate-deo-demo.json"),
+        fetch("assets/exsultate-deo-reference.json"),
+      ]);
+      if (!response.ok) throw new Error(`Demo HTTP ${response.status}`);
+      if (!referenceResponse.ok) throw new Error(`Reference HTTP ${referenceResponse.status}`);
       demo = await response.json();
+      const reference = await referenceResponse.json();
+      if (
+        reference.recordingId !== demo.recordingId ||
+        reference.sourceStartSeconds !== demo.sourceStartSeconds ||
+        reference.durationSeconds !== demo.durationSeconds ||
+        !reference.track?.all?.length
+      ) {
+        throw new Error("Reference provenance does not match the listening excerpt");
+      }
+      demo.tracks.reference = reference.track;
       buttons.forEach((button) => {
         button.disabled = false;
         button.addEventListener("click", () => playTrack(button));
       });
-      status.textContent = "Model outputs ready.";
+      status.textContent = "Reference and model outputs ready.";
       status.classList.add("ready");
       paintAll();
     } catch (error) {
