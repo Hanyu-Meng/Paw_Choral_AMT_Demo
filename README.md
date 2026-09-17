@@ -4,7 +4,7 @@ Public project page for **“PawCT: End-to-End Choral Transcription into
 Separate SATB Note Tracks.”**
 
 **Live demo:**
-[https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/](https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/)
+[https://hanyu-meng.github.io/Paw_Choral_AMT_Demo/](https://hanyu-meng.github.io/Paw_Choral_AMT_Demo/)
 
 PawCT transcribes one mixed choral recording into note-level soprano, alto,
 tenor, and bass parts. This dependency-free academic project page presents a
@@ -21,7 +21,7 @@ access-controlled while its experiment provenance is being frozen.
 ## Contents
 
 - `index.html`, `styles.css`, and `app.js`: the static project page and browser-based note synthesizer;
-- `assets/ICASSP2027_PawCT.pdf`: the current manuscript PDF;
+- `assets/PawCT.pdf`: the current manuscript PDF;
 - `assets/task-overview.png` and `assets/method-overview.png`: manuscript Figures 1 and 2;
 - `assets/exsultate-deo-four-panel.png`: the qualitative piano-roll comparison;
 - `assets/exsultate-deo-demo.json`: a 35-second excerpt of cached PawCT, PagCT, and Post-VA model predictions;

@@ -30,7 +30,7 @@
       "license": "Author-owned manuscript figure; not included under the repository's Apache-2.0 source license"
     },
     {
-      "path": "ICASSP2027_PawCT.pdf",
+      "path": "PawCT.pdf",
       "sha256": "6972c0d83fc658b7db6ba53d93eca98f2eabf0a73f6ded7554da80adee81f931",
       "kind": "manuscript PDF",
       "license": "Author-owned manuscript; not included under the repository's Apache-2.0 source license"
@@ -57,7 +57,7 @@
       "source_work": "Exsultate Deo",
       "composer": "Giovanni Pierluigi da Palestrina",
       "recording_id": "jd2_r4PK5dc",
-      "displayed_excerpt_seconds": [10, 100],
+      "displayed_excerpt_seconds": [10, 45],
       "stored_in_repository": false,
       "rights_note": "Linked at the original provider. This repository does not copy or redistribute the YouChorale audio file."
     }

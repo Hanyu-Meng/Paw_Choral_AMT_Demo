@@ -12,6 +12,7 @@
   const status = document.querySelector("#demo-status");
   let demo = null;
   let audioContext = null;
+  let pianoWave = null;
   let activeNodes = [];
   let activeButton = null;
   let stopTimer = null;
@@ -97,11 +98,22 @@
     audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
     audioContext.resume();
     const start = audioContext.currentTime + 0.06;
+    if (!pianoWave) {
+      const real = new Float32Array(8);
+      const imaginary = new Float32Array([0, 1, 0.52, 0.27, 0.14, 0.07, 0.035, 0.015]);
+      pianoWave = audioContext.createPeriodicWave(real, imaginary);
+    }
+
     const master = audioContext.createGain();
+    const tone = audioContext.createBiquadFilter();
     const compressor = audioContext.createDynamicsCompressor();
-    const partGain = button.dataset.voice === "all" ? 0.55 : 0.78;
+    const partGain = button.dataset.voice === "all" ? 0.46 : 0.68;
     master.gain.setValueAtTime(partGain, start);
-    master.connect(compressor);
+    tone.type = "lowpass";
+    tone.frequency.setValueAtTime(5200, start);
+    tone.Q.setValueAtTime(0.7, start);
+    master.connect(tone);
+    tone.connect(compressor);
     compressor.connect(audioContext.destination);
 
     for (const event of events) {
@@ -109,12 +121,14 @@
       const envelope = audioContext.createGain();
       const onset = start + event.t;
       const offset = onset + Math.max(0.05, event.d);
-      const amplitude = Math.min(0.055, 0.022 + (event.v / 127) * 0.025);
-      oscillator.type = button.dataset.voice === "B" ? "sine" : "triangle";
+      const attackEnd = Math.min(onset + 0.006, offset - 0.02);
+      const decayEnd = Math.min(onset + 0.45, Math.max(attackEnd + 0.01, offset - 0.04));
+      const amplitude = Math.min(0.06, 0.021 + (event.v / 127) * 0.029);
+      oscillator.setPeriodicWave(pianoWave);
       oscillator.frequency.setValueAtTime(440 * 2 ** ((event.p - 69) / 12), onset);
       envelope.gain.setValueAtTime(0.0001, onset);
-      envelope.gain.exponentialRampToValueAtTime(amplitude, onset + 0.015);
-      envelope.gain.setValueAtTime(amplitude, Math.max(onset + 0.02, offset - 0.035));
+      envelope.gain.exponentialRampToValueAtTime(amplitude, attackEnd);
+      envelope.gain.exponentialRampToValueAtTime(Math.max(0.0002, amplitude * 0.32), decayEnd);
       envelope.gain.exponentialRampToValueAtTime(0.0001, offset);
       oscillator.connect(envelope);
       envelope.connect(master);

@@ -8,9 +8,9 @@
     <meta property="og:title" content="PawCT · Choral Transcription into Separate SATB Note Tracks">
     <meta property="og:description" content="Hear how PawCT turns one mixed choral recording into separate soprano, alto, tenor, and bass note tracks.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/">
-    <meta property="og:image" content="https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/assets/task-overview.png">
-    <link rel="canonical" href="https://hanyu-meng.github.io/ICASSP2027_Paw_Choral_AMT_Demo/">
+    <meta property="og:url" content="https://hanyu-meng.github.io/Paw_Choral_AMT_Demo/">
+    <meta property="og:image" content="https://hanyu-meng.github.io/Paw_Choral_AMT_Demo/assets/task-overview.png">
+    <link rel="canonical" href="https://hanyu-meng.github.io/Paw_Choral_AMT_Demo/">
     <link rel="stylesheet" href="styles.css">
     <script src="app.js" defer></script>
     <title>PawCT · Choral Transcription into Separate SATB Note Tracks</title>
@@ -33,12 +33,12 @@
     <main id="main">
       <article class="page" id="top">
         <header class="hero">
-          <p class="eyebrow">ICASSP 2027 research project</p>
+          <p class="eyebrow">Research project</p>
           <h1>PawCT: End-to-End Choral Transcription into Separate SATB Note Tracks</h1>
           <p class="authors">Hanyu Meng<sup>1</sup>, Zhanhong He<sup>2</sup>, Zixun Guo<sup>3</sup>, Yaolong Ju<sup>4</sup></p>
           <p class="affiliations"><sup>1</sup>UNSW · <sup>2</sup>UWA · <sup>3</sup>Queen Mary University of London · <sup>4</sup>Great Bay University</p>
 
-          <p class="link-line"><strong>Links:</strong> [ <a href="assets/ICASSP2027_PawCT.pdf">Paper</a> | <a href="https://github.com/Multimodal-Music-Research-Lab/ICASSP2027_Paw_Choral_AMT">Code</a> | <a href="#citation">Citation</a> ]</p>
+          <p class="link-line"><strong>Links:</strong> [ <a href="assets/PawCT.pdf">Paper</a> | <a href="https://github.com/Multimodal-Music-Research-Lab/Paw_Choral_AMT">Code</a> | <a href="#citation">Citation</a> ]</p>
 
           <p class="standfirst">Most choral transcription systems return one merged stream of notes. PawCT identifies which sections are singing and writes a separate MIDI track for <span class="voice s">soprano</span>, <span class="voice a">alto</span>, <span class="voice t">tenor</span>, and <span class="voice b">bass</span>.</p>
         </header>
@@ -91,7 +91,7 @@
               <div class="bar-row ours"><span>PawCT-OC</span><i style="--value: 100%"></i><b>0.225</b></div>
             </figure>
           </div>
-          <p class="fine-print">Note F1 uses a 50 ms onset tolerance. Full per-part, frame-level, and zero-shot results are reported in the <a href="assets/ICASSP2027_PawCT.pdf">paper</a>.</p>
+          <p class="fine-print">Note F1 uses a 50 ms onset tolerance. Full per-part, frame-level, and zero-shot results are reported in the <a href="assets/PawCT.pdf">paper</a>.</p>
         </section>
 
         <section class="section demo-section" id="demo" aria-labelledby="demo-title">
@@ -103,7 +103,7 @@
               <strong>Original recording</strong>
               <span>Palestrina · 00:10–00:45</span>
             </div>
-            <a class="source-link" href="https://www.youtube.com/watch?v=jd2_r4PK5dc&amp;t=10s" target="_blank" rel="noopener noreferrer">Listen on YouTube <span aria-hidden="true">↗</span></a>
+            <a class="source-link" href="https://www.youtube.com/watch?v=jd2_r4PK5dc&amp;t=10s" target="_blank" rel="noopener noreferrer">Play original recording <span aria-hidden="true">↗</span></a>
           </div>
 
           <p class="demo-status" id="demo-status" role="status">Loading the model outputs…</p>
@@ -149,7 +149,7 @@
             </article>
           </div>
 
-          <p class="demo-note">The players synthesize model-predicted notes in your browser using a neutral tone. Only one player runs at a time. No source audio or reference annotation is stored on this site.</p>
+          <p class="demo-note">The players synthesize model-predicted notes in your browser using a piano-like timbre. Only one player runs at a time. No source audio or reference annotation is stored on this site.</p>
 
           <details class="visual-comparison">
             <summary>View the full piano-roll comparison</summary>
@@ -184,11 +184,11 @@
             <h2 id="citation-title" class="section-heading">Citation</h2>
             <button class="copy-button" type="button" data-copy-citation>Copy BibTeX</button>
           </div>
-          <pre id="bibtex"><code>@inproceedings{meng2027pawct,
+          <pre id="bibtex"><code>@misc{meng2026pawct,
   title     = {PawCT: End-to-End Choral Transcription into Separate SATB Note Tracks},
   author    = {Meng, Hanyu and He, Zhanhong and Guo, Zixun and Ju, Yaolong},
-  booktitle = {IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
-  year      = {2027}
+  year      = {2026},
+  note      = {Manuscript}
 }</code></pre>
           <p class="citation-note">Publication metadata will be updated when the proceedings record is available.</p>
         </section>
@@ -198,7 +198,7 @@
     <footer>
       <div class="page footer-inner">
         <span>© 2026 Hanyu Meng</span>
-        <span><a href="https://github.com/Hanyu-Meng/ICASSP2027_Paw_Choral_AMT_Demo">Demo source</a> · <a href="REPRODUCIBILITY.md">Reproducibility</a> · <a href="PROVENANCE.md">Provenance</a></span>
+        <span><a href="https://github.com/Hanyu-Meng/Paw_Choral_AMT_Demo">Demo source</a> · <a href="REPRODUCIBILITY.md">Reproducibility</a> · <a href="PROVENANCE.md">Provenance</a></span>
       </div>
     </footer>
   </body>
