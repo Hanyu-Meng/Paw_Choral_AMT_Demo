@@ -158,6 +158,7 @@ figcaption { color: var(--muted); font-size: 13px; }
 .number { display: grid; place-items: center; width: 23px; height: 23px; color: #fff; background: #303236; border-radius: 50%; font-size: 11px; font-weight: 750; }
 .player-row, .part-row { border: 1px solid var(--line); background: #fff; }
 .player-row { min-height: 96px; display: grid; grid-template-columns: 142px 50px 1fr; align-items: center; gap: 14px; padding: 14px 16px; }
+.player-row + .player-row { border-top: 0; }
 .player-label strong, .player-label small { display: block; }
 .player-label small { color: var(--muted); font-size: 11px; }
 .play-button { display: grid; place-items: center; width: 38px; height: 38px; padding: 0 0 0 2px; color: var(--ink); background: #fff; border: 1px solid #babdc1; border-radius: 50%; cursor: pointer; }

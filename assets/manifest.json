@@ -37,7 +37,7 @@
     },
     {
       "path": "exsultate-deo-demo.json",
-      "sha256": "9e5a7e169456f24b6e1813f100c82497d6d752ee4a7acff1257446b815f97fc3",
+      "sha256": "40b3e4f24b55aea60bbede1b9be978d41eb1705a4a4767a78cdb5ff2de4ae217",
       "kind": "derived interactive demo data",
       "creator": "Hanyu Meng",
       "copyright": "Copyright 2026 Hanyu Meng",
@@ -45,7 +45,27 @@
       "source_work": "Exsultate Deo",
       "recording_id": "jd2_r4PK5dc",
       "displayed_excerpt_seconds": [10, 45],
-      "contents": "Cached PawCT, PagCT, and Post-VA predicted note events only",
+      "contents": "Cached PawCT, PagCT, Post-VA, MuScriptor-medium, and Yu et al. predicted note events only",
+      "track_event_counts": {
+        "pawct_merged": 425,
+        "pagct_merged": 439,
+        "postva_merged": 311,
+        "muscriptor_medium_merged": 240,
+        "yu_merged": 218
+      },
+      "baseline_provenance": {
+        "muscriptor_medium": {
+          "mode": "audited zero-shot prediction",
+          "prediction_file_sha256": "0bf35332b866c07b1a28521a6860fbeed729facbdf8d98a926ba0607355d1b96",
+          "excerpt_event_sha256": "859e5bb9557b1ddeae71b764d2f8de1cd1388f8443a96df816b7cb7f87145f80"
+        },
+        "yu": {
+          "mode": "new audited full-song demo inference from the frozen baseline checkpoint; not a historical per-song artifact",
+          "checkpoint_sha256": "0d02a65b626284241ee62decf174a3d356ca0cfd7acd8cec890349dce5dae3bf",
+          "decoder": "model.eval, beam4, seg320, hop240, full-song stitching",
+          "excerpt_event_sha256": "d0eb258196e1da621d6e7b7284343c871afa605a5bd747841453c092ad1c7f11"
+        }
+      },
       "rights_note": "No source audio, reference MIDI, annotation, checkpoint, or probability file is included. The browser synthesizes the predicted notes locally."
     },
     {

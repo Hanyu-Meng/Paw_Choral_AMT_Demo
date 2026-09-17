@@ -26,12 +26,13 @@ access-controlled while its experiment provenance is being frozen.
 - `assets/PawCT.pdf`: the current manuscript PDF;
 - `assets/task-overview.png` and `assets/method-overview.png`: manuscript Figures 1 and 2;
 - `assets/exsultate-deo-four-panel.png`: the qualitative piano-roll comparison;
-- `assets/exsultate-deo-demo.json`: a 35-second excerpt of cached PawCT, PagCT, and Post-VA model predictions;
+- `assets/exsultate-deo-demo.json`: a 35-second excerpt of cached PawCT, PagCT, Post-VA, MuScriptor-medium, and Yu et al. model predictions;
 - `assets/audio/exsultate-deo-10s-45s.mp3`: the matching 35-second source-recording excerpt;
 - `assets/audio/exsultate-deo-waveform.json`: normalized peaks used by the interactive waveform;
 - `assets/analysis/`: aggregate, recording-level, symbolic, onset-error, and ablation analyses;
 - `assets/manifest.json`: asset provenance and rights notes;
 - `tools/build_waveform.py`: dependency-free waveform-peak builder for PCM WAV input;
+- `tools/merge_demo_baselines.mjs`: validates and merges audited baseline event exports into the listening demo;
 - `CODE_WALKTHROUGH.md`: English method and code walkthrough;
 - `CODE_WALKTHROUGH.zh-CN.md`: concise Chinese walkthrough;
 - `REPRODUCIBILITY.md` and `PROVENANCE.md`: release caveats and source audit.

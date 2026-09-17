@@ -142,13 +142,19 @@
   }
 
   function trackFor(model, voice) {
-    if (!demo || !demo.tracks[model]) return [];
-    if (voice !== "all" || model === "pagct") {
-      return (demo.tracks[model][voice] || []).map((event) => ({ ...event, part: voice }));
+    const tracks = demo?.tracks?.[model];
+    if (!tracks) return [];
+
+    if (voice !== "all") {
+      return (tracks[voice] || []).map((event) => ({ ...event, part: voice }));
     }
-    return demo.voices.flatMap((part) =>
-      (demo.tracks[model][part] || []).map((event) => ({ ...event, part }))
+
+    const partEvents = demo.voices.flatMap((part) =>
+      (tracks[part] || []).map((event) => ({ ...event, part }))
     );
+    if (partEvents.length) return partEvents;
+
+    return (tracks.all || []).map((event) => ({ ...event, part: "all" }));
   }
 
   function paint(canvas) {
