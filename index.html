@@ -165,7 +165,7 @@
             <article class="player-row">
               <div class="player-label">
                 <strong>MuScriptor-medium <a class="model-citation" href="#ref-muscriptor" aria-label="MuScriptor reference 1">[1]</a></strong>
-                <small>Rouard et al., 2026 · zero-shot</small>
+                <small>Rouard et al., 2026</small>
                 <dl class="excerpt-scores" aria-label="MuScriptor-medium onset-only note F1 for this excerpt">
                   <div><dt>F1@50 ms</dt><dd>0.037</dd></div>
                   <div><dt>F1@100 ms</dt><dd>0.240</dd></div>
@@ -177,7 +177,7 @@
             <article class="player-row">
               <div class="player-label">
                 <strong>Yu &amp; Duan (2024) <a class="model-citation" href="#ref-yu" aria-label="Yu and Duan reference 2">[2]</a></strong>
-                <small>Task-specific · reproduced</small>
+                <small>ISMIR 2024</small>
                 <dl class="excerpt-scores" aria-label="Yu and Duan onset-only note F1 for this excerpt">
                   <div><dt>F1@50 ms</dt><dd>0.017</dd></div>
                   <div><dt>F1@100 ms</dt><dd>0.030</dd></div>
@@ -194,7 +194,7 @@
               </div>
               <div>
                 <strong>What does the comparison establish?</strong>
-                <p>PagCT is task-specific, whereas MuScriptor-medium is evaluated zero-shot. This excerpt therefore illustrates task-aligned event localization versus out-of-domain generalization—not an architecture comparison under matched training. PagCT is substantially better under this event metric, but its 0.433 F1 also makes clear that the transcription is not error-free. The full YouChorale test-set results in the paper remain the primary quantitative evidence.</p>
+                <p>PagCT is task-specific, whereas MuScriptor-medium uses the released general-purpose checkpoint. This excerpt therefore illustrates task-aligned event localization versus out-of-domain generalization—not an architecture comparison under matched training. PagCT is substantially better under this event metric, but its 0.433 F1 also makes clear that the transcription is not error-free. The full YouChorale test-set results in the paper remain the primary quantitative evidence.</p>
               </div>
             </aside>
           </div>
@@ -228,7 +228,7 @@
             </article>
           </div>
 
-          <p class="demo-note">The original excerpt is played directly from this page. The ground-truth row is the canonical part-agnostic union of the official SATB annotations for the same 00:10–00:45 passage; it is the scoring reference and therefore has no model score. Every reference or prediction row is synthesized in your browser with the same piano-like timbre. Displayed scores are onset-only, offset-agnostic Note F1 values recomputed directly for this 35-second excerpt using one-to-one note matching against that reference; they are not values quoted from the cited papers or full-test-set averages. MuScriptor-medium was evaluated zero-shot using the official checkpoint; the Yu–Duan output was reproduced from the authors’ released implementation and a frozen checkpoint. Only one player runs at a time; no source MIDI, full annotation file, checkpoint, or probability array is distributed.</p>
+          <p class="demo-note">The original excerpt is played directly from this page. The ground-truth row is the canonical part-agnostic union of the official SATB annotations for the same 00:10–00:45 passage; it is the scoring reference and therefore has no model score. Every reference or prediction row is synthesized in your browser with the same piano-like timbre. Displayed scores are onset-only, offset-agnostic Note F1 values recomputed directly for this 35-second excerpt using one-to-one note matching against that reference; they are not values quoted from the cited papers or full-test-set averages. MuScriptor-medium was evaluated using its official released checkpoint without YouChorale-specific fine-tuning; the Yu–Duan output was generated using the authors’ released implementation and a frozen checkpoint. Only one player runs at a time; no source MIDI, full annotation file, checkpoint, or probability array is distributed.</p>
 
           <details class="visual-comparison">
             <summary>View the full piano-roll comparison</summary>
@@ -356,7 +356,7 @@
 
           <aside class="interpretation-note">
             <strong>Interpretation, not overclaim.</strong>
-            <p>The measurements directly support a frame-to-event localization gap. Soft vocal attacks, legato singing, a long-tailed training distribution, and MuScriptor's generic MIDI-token representation are plausible contributors rather than independently proven causal effects. MuScriptor's own <a href="https://arxiv.org/abs/2607.08168" target="_blank" rel="noopener noreferrer">paper</a> and <a href="https://huggingface.co/MuScriptor/muscriptor-medium" target="_blank" rel="noopener noreferrer">model card</a> similarly report weaker onset/offset precision for choral music. MuScriptor-medium is evaluated here zero-shot.</p>
+            <p>The measurements directly support a frame-to-event localization gap. Soft vocal attacks, legato singing, a long-tailed training distribution, and MuScriptor's generic MIDI-token representation are plausible contributors rather than independently proven causal effects. MuScriptor's own <a href="https://arxiv.org/abs/2607.08168" target="_blank" rel="noopener noreferrer">paper</a> and <a href="https://huggingface.co/MuScriptor/muscriptor-medium" target="_blank" rel="noopener noreferrer">model card</a> similarly report weaker onset/offset precision for choral music. MuScriptor-medium is evaluated here using the released general-purpose checkpoint.</p>
           </aside>
         </section>
 
