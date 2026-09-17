@@ -25,7 +25,7 @@
           <a href="#demo">Demo</a>
           <a href="#results">Results</a>
           <a href="#analysis">Analysis</a>
-          <a href="#method">Method</a>
+          <a href="#method">Model Overview</a>
         </div>
       </nav>
     </header>
@@ -88,6 +88,23 @@
             </figure>
           </div>
           <p class="fine-print">Note F1 uses a 50 ms onset tolerance. Full per-part, frame-level, and zero-shot results are reported in the <a href="assets/PawCT.pdf">paper</a>.</p>
+        </section>
+
+        <section class="section" id="method" aria-labelledby="method-title">
+          <h2 id="method-title" class="section-heading">Model Overview</h2>
+          <p class="section-intro">PawCT detects notes and assigns them to vocal parts in one model. A global training signal keeps the complete pitch content intact, while pitch range and melodic continuity help maintain consistent SATB lines.</p>
+          <figure class="method-figure">
+            <a href="assets/method-overview.png" aria-label="Open the method diagram at full resolution">
+              <img src="assets/method-overview.png" alt="PawCT predicts separate SATB note events directly, while the comparison systems produce one merged track or assign parts after transcription." width="5059" height="1553">
+            </a>
+            <figcaption>PawCT predicts SATB notes directly from the mixed recording. The two-stage alternative first transcribes a merged track and assigns parts afterwards.</figcaption>
+          </figure>
+
+          <div class="method-points">
+            <article><span>01</span><h3>Find the notes</h3><p>A shared audio encoder captures the complete musical content of the choir.</p></article>
+            <article><span>02</span><h3>Follow each line</h3><p>Separate output heads use vocal range and melodic continuity to preserve SATB structure.</p></article>
+            <article><span>03</span><h3>Export the parts</h3><p>Active soprano, alto, tenor, and bass sections are returned as independent note tracks.</p></article>
+          </div>
         </section>
 
         <section class="section analysis-section" id="analysis" aria-labelledby="analysis-title">
@@ -339,23 +356,6 @@
               <figcaption>Ground truth and model outputs for the 10–100 second passage. Color denotes the assigned SATB part.</figcaption>
             </figure>
           </details>
-        </section>
-
-        <section class="section" id="method" aria-labelledby="method-title">
-          <h2 id="method-title" class="section-heading">How PawCT keeps the parts separate</h2>
-          <p class="section-intro">PawCT detects notes and assigns them to vocal parts in one model. A global training signal keeps the complete pitch content intact, while pitch range and melodic continuity help maintain consistent SATB lines.</p>
-          <figure class="method-figure">
-            <a href="assets/method-overview.png" aria-label="Open the method diagram at full resolution">
-              <img src="assets/method-overview.png" alt="PawCT predicts separate SATB note events directly, while the comparison systems produce one merged track or assign parts after transcription." width="5059" height="1553">
-            </a>
-            <figcaption>PawCT predicts SATB notes directly from the mixed recording. The two-stage alternative first transcribes a merged track and assigns parts afterwards.</figcaption>
-          </figure>
-
-          <div class="method-points">
-            <article><span>01</span><h3>Find the notes</h3><p>A shared audio encoder captures the complete musical content of the choir.</p></article>
-            <article><span>02</span><h3>Follow each line</h3><p>Separate output heads use vocal range and melodic continuity to preserve SATB structure.</p></article>
-            <article><span>03</span><h3>Export the parts</h3><p>Active soprano, alto, tenor, and bass sections are returned as independent note tracks.</p></article>
-          </div>
         </section>
 
         <section class="section citation-section" id="citation" hidden aria-hidden="true" data-status="TBD">
