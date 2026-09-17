@@ -24,6 +24,7 @@
         <div class="nav-links">
           <a href="#demo">Demo</a>
           <a href="#results">Results</a>
+          <a href="#analysis">Analysis</a>
           <a href="#method">Method</a>
           <a href="#citation">Citation</a>
         </div>
@@ -94,16 +95,145 @@
           <p class="fine-print">Note F1 uses a 50 ms onset tolerance. Full per-part, frame-level, and zero-shot results are reported in the <a href="assets/PawCT.pdf">paper</a>.</p>
         </section>
 
+        <section class="section analysis-section" id="analysis" aria-labelledby="analysis-title">
+          <p class="eyebrow">Error analysis</p>
+          <h2 id="analysis-title" class="section-heading">Why general-purpose transcription falls short on choir</h2>
+          <p class="section-intro">The central difficulty is not merely detecting which pitches are active. It is turning sustained vocal activity into correctly localized note events.</p>
+
+          <div class="analysis-verdict">
+            <div>
+              <span class="verdict-label">The revealing comparison</span>
+              <strong>Similar frame F1, 4.55× note F1</strong>
+              <p>MuScriptor-medium and PagCT are nearly tied at the frame level (0.730 vs. 0.738), but PagCT reaches 0.382 note F1 at 50 ms, compared with 0.084 for MuScriptor.</p>
+            </div>
+            <dl>
+              <div><dt>MuScriptor retention</dt><dd>11.5%</dd></div>
+              <div><dt>PagCT retention</dt><dd>51.8%</dd></div>
+              <div><dt>Note-count ratio</dt><dd>1.018</dd></div>
+            </dl>
+          </div>
+
+          <figure class="analysis-figure wide-figure">
+            <a href="assets/analysis/baseline-frame-event-gap.png" aria-label="Open the aggregate baseline analysis at full resolution">
+              <img src="assets/analysis/baseline-frame-event-gap.png" alt="Comparison of frame F1 and note F1 for all baselines, highlighting MuScriptor's large frame-to-event drop." width="2859" height="1142" loading="lazy">
+            </a>
+            <figcaption>Frame accuracy does not guarantee event accuracy. The frame-to-event retention ratio is descriptive rather than a standard evaluation metric.</figcaption>
+          </figure>
+
+          <div class="evidence-grid">
+            <article>
+              <span>01</span>
+              <h3>Not simply a pitch-detection failure</h3>
+              <p>Across 30 recordings, MuScriptor's median predicted/reference note-count ratio is 1.018. Its low note score is therefore not explained by a global tendency to emit far too many or too few notes.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Strong tolerance sensitivity</h3>
+              <p>MuScriptor improves from 0.084 at 50 ms to 0.231 at 100 ms. This recovery is consistent with imprecise onset localization, although the residual gap indicates additional segmentation errors.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Scale alone does not solve it</h3>
+              <p>On the same audited evaluation, MuScriptor-medium outperforms MuScriptor-large at both 50 and 100 ms. Task-aligned boundary modeling matters more here than simply increasing general-purpose model size.</p>
+            </article>
+          </div>
+
+          <details class="baseline-notes">
+            <summary>Why the other baselines fall short</summary>
+            <div class="baseline-note-grid">
+              <article><strong>Onsets and Frames</strong><p>High precision but low recall indicates conservative detection and many missed notes in dense vocal mixtures.</p></article>
+              <article><strong>MT3</strong><p>Generic sequence transcription transfers weakly to precise choral note boundaries.</p></article>
+              <article><strong>YourMT3+</strong><p>Its improved frame recall does not translate into improved 50-ms note F1, showing that activity coverage alone is insufficient.</p></article>
+              <article><strong>Yu et al.</strong><p>The strongest task-relevant baseline, but PagCT improves both note precision and recall rather than trading one for the other.</p></article>
+              <article><strong>Without augmentation</strong><p>Frame F1 is slightly higher, while note F1 is lower at both tolerances—direct evidence that frame occupancy cannot replace event-level evaluation.</p></article>
+            </div>
+          </details>
+
+          <div class="analysis-subhead">
+            <div>
+              <p class="eyebrow">All 30 test recordings</p>
+              <h3>Where MuScriptor fails</h3>
+            </div>
+            <p>The recording-level view prevents the interpretation from resting on a single favorable excerpt.</p>
+          </div>
+          <figure class="analysis-figure wide-figure">
+            <a href="assets/analysis/muscriptor-recording-failure-map.png" aria-label="Open the recording-level MuScriptor failure map at full resolution">
+              <img src="assets/analysis/muscriptor-recording-failure-map.png" alt="Recording-level scatter plots comparing MuScriptor frame F1, note F1, tolerance recovery, and predicted note count." width="2729" height="1092" loading="lazy">
+            </a>
+            <figcaption>Three mechanically selected recordings expose distinct failure patterns rather than one universal explanation.</figcaption>
+          </figure>
+
+          <div class="case-grid">
+            <article><span>Extreme frame/event gap</span><strong>0m6D6hvYoFQ</strong><p>Frame F1 is 0.861, while note F1 is only 0.010 at 50 ms. Much of the sustained pitch activity is correct, but almost none of the events are localized precisely.</p></article>
+            <article><span>Tolerance-sensitive timing</span><strong>SeBQqa0MhRo</strong><p>Note F1 rises from 0.161 at 50 ms to 0.575 at 100 ms, consistent with many near-correct but insufficiently precise onsets.</p></article>
+            <article><span>Residual segmentation errors</span><strong>jd2_r4PK5dc</strong><p>Note F1 rises from 0.052 to 0.224, but remains low at 100 ms; timing error alone cannot explain the missed, extra, merged, or fragmented notes.</p></article>
+          </div>
+
+          <figure class="analysis-figure wide-figure">
+            <a href="assets/analysis/jd2-symbolic-case-study.png" aria-label="Open the symbolic case study at full resolution">
+              <img src="assets/analysis/jd2-symbolic-case-study.png" alt="Aligned piano rolls for the reference, MuScriptor-medium, PagCT, and PawCT over an eight-second Exsultate Deo phrase." width="2905" height="1626" loading="lazy">
+            </a>
+            <figcaption>The eight-second window was selected deterministically among windows with at least 20 reference notes. Demo decodes are illustrative and are not aggregate Table 1 scores.</figcaption>
+          </figure>
+
+          <details class="diagnostic-details">
+            <summary>View the onset-error diagnostic</summary>
+            <figure class="analysis-figure">
+              <a href="assets/analysis/muscriptor-onset-error-cases.png" aria-label="Open the onset-error diagnostic at full resolution">
+                <img src="assets/analysis/muscriptor-onset-error-cases.png" alt="Empirical cumulative distributions of descriptive same-pitch onset errors for three MuScriptor case studies." width="2859" height="944" loading="lazy">
+              </a>
+              <figcaption>This nearest, unique, same-pitch pairing is a diagnostic visualization, not the official note-matching metric.</figcaption>
+            </figure>
+          </details>
+
+          <div class="analysis-subhead ablation-heading">
+            <div>
+              <p class="eyebrow">Part-aware ablation</p>
+              <h3>Why joint transcription and assignment help</h3>
+            </div>
+            <p>Union supervision improves the shared acoustic task, while ordered continuity recovers note-level consistency that pitch range alone does not provide.</p>
+          </div>
+          <figure class="analysis-figure wide-figure">
+            <a href="assets/analysis/part-aware-ablation-story.png" aria-label="Open the part-aware ablation analysis at full resolution">
+              <img src="assets/analysis/part-aware-ablation-story.png" alt="Part-aware frame and note F1 ablations, including union supervision, range prior, ordered continuity, and post-hoc assignment." width="2833" height="1118" loading="lazy">
+            </a>
+            <figcaption>PawCT-OC improves note F1 by 28.6% over Post-VA, supporting joint acoustic transcription and voice assignment instead of assigning parts afterwards.</figcaption>
+          </figure>
+
+          <aside class="interpretation-note">
+            <strong>Interpretation, not overclaim.</strong>
+            <p>The measurements directly support a frame-to-event localization gap. Soft vocal attacks, legato singing, a long-tailed training distribution, and MuScriptor's generic MIDI-token representation are plausible contributors rather than independently proven causal effects. MuScriptor's own <a href="https://arxiv.org/abs/2607.08168" target="_blank" rel="noopener noreferrer">paper</a> and <a href="https://huggingface.co/MuScriptor/muscriptor-medium" target="_blank" rel="noopener noreferrer">model card</a> similarly report weaker onset/offset precision for choral music. MuScriptor-medium is evaluated here zero-shot.</p>
+          </aside>
+        </section>
+
         <section class="section demo-section" id="demo" aria-labelledby="demo-title">
           <h2 id="demo-title" class="section-heading">Listen to the transcription</h2>
           <p class="section-intro">This 35-second excerpt of <em>Exsultate Deo</em> shows the central difference: PagCT returns one merged note stream, while PawCT returns four independently playable vocal parts.</p>
 
-          <div class="source-row">
-            <div>
-              <strong>Original recording</strong>
-              <span>Palestrina · 00:10–00:45</span>
+          <div class="waveform-player" data-waveform-player>
+            <div class="waveform-copy">
+              <div>
+                <strong>Original recording</strong>
+                <span>Palestrina · <em>Exsultate Deo</em> · 00:10–00:45</span>
+              </div>
+              <span class="local-audio-label">35-second on-page excerpt</span>
             </div>
-            <a class="source-link" href="https://www.youtube.com/watch?v=jd2_r4PK5dc&amp;t=10s" target="_blank" rel="noopener noreferrer">Play original recording <span aria-hidden="true">↗</span></a>
+            <div class="waveform-controls">
+              <button class="waveform-play" type="button" data-original-play aria-label="Play the original recording">
+                <span aria-hidden="true">▶</span>
+              </button>
+              <div class="waveform-track">
+                <canvas id="original-waveform" aria-hidden="true"></canvas>
+                <input id="original-scrubber" class="waveform-scrubber" type="range" min="0" max="35" step="0.01" value="0" aria-label="Seek through the original recording">
+                <span class="waveform-loading" data-waveform-status>Preparing waveform…</span>
+              </div>
+              <output class="waveform-time" for="original-scrubber" data-waveform-time>0:00 / 0:35</output>
+            </div>
+            <audio id="original-recording" class="source-audio-element" preload="metadata" src="assets/audio/exsultate-deo-10s-45s.mp3"></audio>
+            <div class="waveform-footnote">
+              <span>The audio stays on this page—click the waveform to seek.</span>
+              <a href="https://www.youtube.com/watch?v=jd2_r4PK5dc" target="_blank" rel="noopener noreferrer">Recording source and attribution <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
 
           <p class="demo-status" id="demo-status" role="status">Loading the model outputs…</p>
@@ -149,7 +279,7 @@
             </article>
           </div>
 
-          <p class="demo-note">The players synthesize model-predicted notes in your browser using a piano-like timbre. Only one player runs at a time. No source audio or reference annotation is stored on this site.</p>
+          <p class="demo-note">The original excerpt is played directly from this page. The transcription players synthesize model-predicted notes in your browser using a piano-like timbre. Only one player runs at a time; no reference annotation, checkpoint, or probability array is distributed.</p>
 
           <details class="visual-comparison">
             <summary>View the full piano-roll comparison</summary>

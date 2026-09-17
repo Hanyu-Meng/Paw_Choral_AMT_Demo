@@ -10,12 +10,136 @@
   const buttons = [...document.querySelectorAll(".play-button[data-model]")];
   const canvases = [...document.querySelectorAll(".piano-roll[data-model]")];
   const status = document.querySelector("#demo-status");
+  const sourcePlayer = document.querySelector("[data-waveform-player]");
+  const sourceAudio = document.querySelector("#original-recording");
+  const sourceButton = document.querySelector("[data-original-play]");
+  const sourceCanvas = document.querySelector("#original-waveform");
+  const sourceScrubber = document.querySelector("#original-scrubber");
+  const sourceStatus = document.querySelector("[data-waveform-status]");
+  const sourceTime = document.querySelector("[data-waveform-time]");
   let demo = null;
   let audioContext = null;
   let pianoWave = null;
   let activeNodes = [];
   let activeButton = null;
   let stopTimer = null;
+  let sourcePeaks = null;
+  let sourceFrame = null;
+
+  function formatTime(seconds) {
+    if (!Number.isFinite(seconds)) return "0:00";
+    const rounded = Math.max(0, Math.floor(seconds));
+    return `${Math.floor(rounded / 60)}:${String(rounded % 60).padStart(2, "0")}`;
+  }
+
+  function updateSourceTime() {
+    if (!sourceAudio || !sourceScrubber || !sourceTime) return;
+    const duration = Number.isFinite(sourceAudio.duration) ? sourceAudio.duration : 35;
+    sourceScrubber.max = String(duration);
+    sourceScrubber.value = String(Math.min(sourceAudio.currentTime, duration));
+    sourceTime.textContent = `${formatTime(sourceAudio.currentTime)} / ${formatTime(duration)}`;
+  }
+
+  function drawSourceWaveform() {
+    if (!sourceCanvas) return;
+    const rect = sourceCanvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    sourceCanvas.width = Math.round(rect.width * ratio);
+    sourceCanvas.height = Math.round(rect.height * ratio);
+    const ctx = sourceCanvas.getContext("2d");
+    ctx.scale(ratio, ratio);
+    ctx.fillStyle = "#f5f7f9";
+    ctx.fillRect(0, 0, rect.width, rect.height);
+    ctx.strokeStyle = "#d9dee3";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, rect.height / 2);
+    ctx.lineTo(rect.width, rect.height / 2);
+    ctx.stroke();
+    if (!sourcePeaks?.length) return;
+
+    const duration = Number.isFinite(sourceAudio?.duration) ? sourceAudio.duration : 35;
+    const progress = duration > 0 ? (sourceAudio?.currentTime || 0) / duration : 0;
+    const bars = Math.max(1, Math.floor(rect.width / 2));
+    for (let index = 0; index < bars; index += 1) {
+      const peakIndex = Math.min(sourcePeaks.length - 1, Math.floor((index / bars) * sourcePeaks.length));
+      const magnitude = Math.max(0.04, sourcePeaks[peakIndex]);
+      const barHeight = magnitude * rect.height * 0.82;
+      const x = (index / bars) * rect.width;
+      ctx.fillStyle = index / bars <= progress ? "#2877c7" : "#aeb6be";
+      ctx.fillRect(x, (rect.height - barHeight) / 2, 1.25, barHeight);
+    }
+  }
+
+  function stopSourceAnimation() {
+    if (sourceFrame) window.cancelAnimationFrame(sourceFrame);
+    sourceFrame = null;
+  }
+
+  function animateSource() {
+    updateSourceTime();
+    drawSourceWaveform();
+    if (sourceAudio && !sourceAudio.paused) {
+      sourceFrame = window.requestAnimationFrame(animateSource);
+    }
+  }
+
+  function pauseSource() {
+    sourceAudio?.pause();
+  }
+
+  async function loadSourceWaveform() {
+    if (!sourceAudio || !sourceCanvas || !sourcePlayer) return;
+    try {
+      let staticPeaksLoaded = false;
+      try {
+        const peakResponse = await fetch("assets/audio/exsultate-deo-waveform.json");
+        if (!peakResponse.ok) throw new Error(`HTTP ${peakResponse.status}`);
+        const waveform = await peakResponse.json();
+        if (!Array.isArray(waveform.peaks) || !waveform.peaks.length) {
+          throw new Error("Waveform peak data is empty");
+        }
+        sourcePeaks = Float32Array.from(waveform.peaks);
+        staticPeaksLoaded = true;
+      } catch (peakError) {
+        console.warn("Precomputed waveform unavailable; decoding audio locally", peakError);
+      }
+
+      if (!staticPeaksLoaded) {
+        const response = await fetch(sourceAudio.currentSrc || sourceAudio.src);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const encoded = await response.arrayBuffer();
+        const DecodeContext = window.AudioContext || window.webkitAudioContext;
+        const decodeContext = new DecodeContext();
+        const buffer = await decodeContext.decodeAudioData(encoded.slice(0));
+        const bucketCount = 1800;
+        const blockSize = Math.max(1, Math.floor(buffer.length / bucketCount));
+        const peaks = new Float32Array(bucketCount);
+        for (let bucket = 0; bucket < bucketCount; bucket += 1) {
+          const start = bucket * blockSize;
+          const end = Math.min(buffer.length, start + blockSize);
+          let peak = 0;
+          for (let channel = 0; channel < buffer.numberOfChannels; channel += 1) {
+            const samples = buffer.getChannelData(channel);
+            for (let sample = start; sample < end; sample += 1) {
+              peak = Math.max(peak, Math.abs(samples[sample]));
+            }
+          }
+          peaks[bucket] = peak;
+        }
+        sourcePeaks = peaks;
+        await decodeContext.close();
+      }
+      sourceStatus?.classList.add("is-ready");
+      drawSourceWaveform();
+    } catch (error) {
+      sourcePlayer.classList.add("is-fallback");
+      if (sourceAudio) sourceAudio.controls = true;
+      if (sourceStatus) sourceStatus.textContent = "Waveform unavailable; use the audio controls below.";
+      console.error("Original recording waveform failed to load", error);
+    }
+  }
 
   function trackFor(model, voice) {
     if (!demo || !demo.tracks[model]) return [];
@@ -92,6 +216,7 @@
       return;
     }
     resetPlayer();
+    pauseSource();
     const events = trackFor(button.dataset.model, button.dataset.voice);
     if (!events.length) return;
 
@@ -161,6 +286,55 @@
     }
   }
 
+  sourceButton?.addEventListener("click", async () => {
+    if (!sourceAudio) return;
+    if (sourceAudio.paused) {
+      resetPlayer();
+      try {
+        await sourceAudio.play();
+      } catch (error) {
+        sourcePlayer?.classList.add("is-fallback");
+        sourceAudio.controls = true;
+        console.error("Original recording playback failed", error);
+      }
+    } else {
+      sourceAudio.pause();
+    }
+  });
+
+  sourceAudio?.addEventListener("loadedmetadata", () => {
+    updateSourceTime();
+    drawSourceWaveform();
+  });
+  sourceAudio?.addEventListener("play", () => {
+    sourceButton?.classList.add("is-playing");
+    sourceButton?.setAttribute("aria-label", "Pause the original recording");
+    const icon = sourceButton?.querySelector("span");
+    if (icon) icon.textContent = "❚❚";
+    stopSourceAnimation();
+    animateSource();
+  });
+  sourceAudio?.addEventListener("pause", () => {
+    sourceButton?.classList.remove("is-playing");
+    sourceButton?.setAttribute("aria-label", "Play the original recording");
+    const icon = sourceButton?.querySelector("span");
+    if (icon) icon.textContent = "▶";
+    stopSourceAnimation();
+    updateSourceTime();
+    drawSourceWaveform();
+  });
+  sourceAudio?.addEventListener("ended", () => {
+    sourceAudio.currentTime = 0;
+    updateSourceTime();
+    drawSourceWaveform();
+  });
+  sourceScrubber?.addEventListener("input", () => {
+    if (!sourceAudio) return;
+    sourceAudio.currentTime = Number(sourceScrubber.value);
+    updateSourceTime();
+    drawSourceWaveform();
+  });
+
   const copyButton = document.querySelector("[data-copy-citation]");
   copyButton?.addEventListener("click", async () => {
     const citation = document.querySelector("#bibtex code")?.textContent || "";
@@ -176,8 +350,16 @@
   let resizeTimer = null;
   window.addEventListener("resize", () => {
     window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(paintAll, 120);
+    resizeTimer = window.setTimeout(() => {
+      paintAll();
+      drawSourceWaveform();
+    }, 120);
   });
-  window.addEventListener("pagehide", resetPlayer);
+  window.addEventListener("pagehide", () => {
+    resetPlayer();
+    pauseSource();
+    stopSourceAnimation();
+  });
+  loadSourceWaveform();
   loadDemo();
 })();

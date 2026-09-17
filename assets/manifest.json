@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "assets": [
     {
       "path": "exsultate-deo-four-panel.png",
@@ -47,19 +47,76 @@
       "displayed_excerpt_seconds": [10, 45],
       "contents": "Cached PawCT, PagCT, and Post-VA predicted note events only",
       "rights_note": "No source audio, reference MIDI, annotation, checkpoint, or probability file is included. The browser synthesizes the predicted notes locally."
+    },
+    {
+      "path": "audio/exsultate-deo-10s-45s.mp3",
+      "sha256": "8da42a2d08a9df1d125ee57dd7daf1aba76b6453fc14b15fbb3dfe7e15298642",
+      "kind": "35-second source-recording excerpt",
+      "source_sha256": "73212f1fc740d61cf9a3ad245d69793665ed99daaabe282ccc1e0be45795d6ac",
+      "source_work": "Exsultate Deo",
+      "composer": "Giovanni Pierluigi da Palestrina",
+      "recording_id": "jd2_r4PK5dc",
+      "displayed_excerpt_seconds": [10, 45],
+      "codec": "MP3, 48 kHz stereo, 192 kb/s",
+      "license": "Not included under the repository's Apache-2.0 source license",
+      "rights_note": "A short excerpt is presented for scholarly evaluation of the transcription outputs. Copyright in the source recording remains with its respective rights holder; the original provider is linked on the page."
+    },
+    {
+      "path": "audio/exsultate-deo-waveform.json",
+      "sha256": "44cddfc8f311a5b165d8db9ad0c8a340eb1a623a0fa034253bc2a3712729a6f8",
+      "kind": "derived normalized waveform peaks",
+      "source_asset": "audio/exsultate-deo-10s-45s.mp3",
+      "bucket_count": 1800,
+      "license": "Derived site data; not included under the repository's Apache-2.0 source license"
+    },
+    {
+      "path": "analysis/baseline-frame-event-gap.png",
+      "sha256": "2e7a26b3f8f544b06e420301f22173b69538e23850fd6b899bad1fb6f900850b",
+      "kind": "author-generated aggregate baseline analysis",
+      "contents": "Frame-to-event comparison using the manuscript table and audited MuScriptor evaluation",
+      "license": "Author-owned research figure; not included under the repository's Apache-2.0 source license"
+    },
+    {
+      "path": "analysis/muscriptor-recording-failure-map.png",
+      "sha256": "930728296f45aed8c921db62dd6925a8299088b4e38bdd96ffbc8c61c3118c73",
+      "kind": "author-generated recording-level analysis",
+      "contents": "All 30 YouChorale test recordings from the audited MuScriptor-medium evaluation",
+      "license": "Author-owned research figure; not included under the repository's Apache-2.0 source license"
+    },
+    {
+      "path": "analysis/part-aware-ablation-story.png",
+      "sha256": "7accc8f6ac36b9cfbd2361fe630fe0d869a9d8e66ada0337eeed311ca0fc605a",
+      "kind": "author-generated ablation analysis",
+      "contents": "Part-aware frame and note F1 across union, RP, OC, and Post-VA configurations",
+      "license": "Author-owned research figure; not included under the repository's Apache-2.0 source license"
+    },
+    {
+      "path": "analysis/jd2-symbolic-case-study.png",
+      "sha256": "3a6263b956d6c8e7a87eb86bfabb44813e891d807531f48e3448a3b475d19641",
+      "kind": "author-generated symbolic case study",
+      "contents": "Deterministically selected eight-second reference, MuScriptor, PagCT, and PawCT comparison",
+      "license": "Author-owned research figure; not included under the repository's Apache-2.0 source license"
+    },
+    {
+      "path": "analysis/muscriptor-onset-error-cases.png",
+      "sha256": "cd8719d1e7057f85d69bbc125104f963e4e90bff6165a1984c755bdbf3b793ba",
+      "kind": "author-generated diagnostic figure",
+      "contents": "Descriptive same-pitch onset-error distributions for three case studies",
+      "license": "Author-owned research figure; not included under the repository's Apache-2.0 source license"
     }
   ],
   "external_media": [
     {
-      "kind": "linked source recording",
+      "kind": "source-recording attribution",
       "provider": "YouTube",
       "source_url": "https://www.youtube.com/watch?v=jd2_r4PK5dc",
       "source_work": "Exsultate Deo",
       "composer": "Giovanni Pierluigi da Palestrina",
       "recording_id": "jd2_r4PK5dc",
       "displayed_excerpt_seconds": [10, 45],
-      "stored_in_repository": false,
-      "rights_note": "Linked at the original provider. This repository does not copy or redistribute the YouChorale audio file."
+      "stored_in_repository": true,
+      "stored_asset": "audio/exsultate-deo-10s-45s.mp3",
+      "rights_note": "The original provider is linked for attribution. The repository stores only the displayed 35-second scholarly excerpt, not the full recording."
     }
   ]
 }

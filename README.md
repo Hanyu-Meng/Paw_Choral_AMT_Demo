@@ -9,7 +9,9 @@ Separate SATB Note Tracks.”**
 PawCT transcribes one mixed choral recording into note-level soprano, alto,
 tenor, and bass parts. This dependency-free academic project page presents a
 concise paper summary, headline results, manuscript figures, and an interactive
-listening comparison rendered from cached model predictions.
+listening comparison rendered from cached model predictions. The original
+35-second recording excerpt is presented in an on-page waveform player, so
+visitors do not need to leave the demo to hear it.
 
 ## Scientific status
 
@@ -25,14 +27,20 @@ access-controlled while its experiment provenance is being frozen.
 - `assets/task-overview.png` and `assets/method-overview.png`: manuscript Figures 1 and 2;
 - `assets/exsultate-deo-four-panel.png`: the qualitative piano-roll comparison;
 - `assets/exsultate-deo-demo.json`: a 35-second excerpt of cached PawCT, PagCT, and Post-VA model predictions;
+- `assets/audio/exsultate-deo-10s-45s.mp3`: the matching 35-second source-recording excerpt;
+- `assets/audio/exsultate-deo-waveform.json`: normalized peaks used by the interactive waveform;
+- `assets/analysis/`: aggregate, recording-level, symbolic, onset-error, and ablation analyses;
 - `assets/manifest.json`: asset provenance and rights notes;
+- `tools/build_waveform.py`: dependency-free waveform-peak builder for PCM WAV input;
 - `CODE_WALKTHROUGH.md`: English method and code walkthrough;
 - `CODE_WALKTHROUGH.zh-CN.md`: concise Chinese walkthrough;
 - `REPRODUCIBILITY.md` and `PROVENANCE.md`: release caveats and source audit.
 
-No YouChorale audio file, source MIDI, annotation, model checkpoint, or
-probability file is distributed here. The qualitative example links to the
-corresponding recording at its original YouTube host.
+The site distributes one 35-second YouChorale recording excerpt for scholarly
+comparison and links its original provider for attribution. It does not
+distribute the full recording, source MIDI, annotations, model checkpoints, or
+probability files. See `assets/manifest.json` for the excerpt's provenance and
+rights note.
 
 ## Local preview
 
