@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://hanyu-meng.github.io/Paw_Choral_AMT_Demo/">
     <meta property="og:image" content="https://hanyu-meng.github.io/Paw_Choral_AMT_Demo/assets/task-overview.png">
     <link rel="canonical" href="https://hanyu-meng.github.io/Paw_Choral_AMT_Demo/">
-    <link rel="stylesheet" href="styles.css?v=20260917-note-f1">
+    <link rel="stylesheet" href="styles.css?v=20260917-demo-citations">
     <script src="app.js" defer></script>
     <title>PawCT · Choral Transcription into Separate SATB Note Tracks</title>
   </head>
@@ -22,10 +22,10 @@
       <nav class="page nav-inner" aria-label="Primary navigation">
         <a class="wordmark" href="#top">PawCT</a>
         <div class="nav-links">
-          <a href="#demo">Demo</a>
           <a href="#results">Results</a>
-          <a href="#analysis">Analysis</a>
           <a href="#method">Model Overview</a>
+          <a href="#demo">Demo</a>
+          <a href="#analysis">Analysis</a>
         </div>
       </nav>
     </header>
@@ -101,6 +101,154 @@
           </figure>
         </section>
 
+        <section class="section demo-section" id="demo" aria-labelledby="demo-title">
+          <h2 id="demo-title" class="section-heading">Listen to the transcription</h2>
+          <p class="section-intro">This 35-second excerpt of <em>Exsultate Deo</em> lets you compare the part-agnostic ground truth with merged predictions from our PagCT model, MuScriptor-medium, and Yu &amp; Duan (2024). PawCT additionally returns four independently playable vocal parts.</p>
+
+          <div class="waveform-player" data-waveform-player>
+            <div class="waveform-copy">
+              <div>
+                <strong>Original recording</strong>
+                <span>Palestrina · <em>Exsultate Deo</em> · 00:10–00:45</span>
+              </div>
+              <span class="local-audio-label">35-second on-page excerpt</span>
+            </div>
+            <div class="waveform-controls">
+              <button class="waveform-play" type="button" data-original-play aria-label="Play the original recording">
+                <span aria-hidden="true">▶</span>
+              </button>
+              <div class="waveform-track">
+                <canvas id="original-waveform" aria-hidden="true"></canvas>
+                <input id="original-scrubber" class="waveform-scrubber" type="range" min="0" max="35" step="0.01" value="0" aria-label="Seek through the original recording">
+                <span class="waveform-loading" data-waveform-status>Preparing waveform…</span>
+              </div>
+              <output class="waveform-time" for="original-scrubber" data-waveform-time>0:00 / 0:35</output>
+            </div>
+            <audio id="original-recording" class="source-audio-element" preload="metadata" src="assets/audio/exsultate-deo-10s-45s.mp3"></audio>
+            <div class="waveform-footnote">
+              <span>The audio stays on this page—click the waveform to seek.</span>
+              <a href="https://www.youtube.com/watch?v=jd2_r4PK5dc" target="_blank" rel="noopener noreferrer">Recording source and attribution <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <p class="demo-status" id="demo-status" role="status">Loading the reference and model outputs…</p>
+
+          <div class="listening-block">
+            <div class="listening-heading">
+              <div><span class="number">1</span><h3>Merged transcription</h3></div>
+              <p>All annotated or detected notes share one track.</p>
+            </div>
+            <article class="player-row">
+              <div class="player-label">
+                <strong>Ground truth</strong>
+                <small>Reference · merged note track</small>
+                <dl class="excerpt-scores reference-scores" aria-label="Ground truth is the scoring reference and has no model score">
+                  <div><dt>F1@50 ms</dt><dd aria-label="Not applicable">—</dd></div>
+                  <div><dt>F1@100 ms</dt><dd aria-label="Not applicable">—</dd></div>
+                </dl>
+              </div>
+              <button class="play-button" type="button" data-model="reference" data-voice="all" aria-label="Play the ground-truth reference merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
+              <canvas class="piano-roll" data-model="reference" data-voice="all" aria-label="Piano roll for the ground-truth reference merged transcription"></canvas>
+            </article>
+            <article class="player-row pagct-row">
+              <div class="player-label">
+                <strong>PagCT <span class="ours-tag">Ours</span></strong>
+                <small>Our part-agnostic model · single note track</small>
+                <dl class="excerpt-scores" aria-label="PagCT onset-only note F1 for this excerpt">
+                  <div><dt>F1@50 ms</dt><dd>0.433</dd></div>
+                  <div><dt>F1@100 ms</dt><dd>0.668</dd></div>
+                </dl>
+              </div>
+              <button class="play-button" type="button" data-model="pagct" data-voice="all" aria-label="Play the PagCT merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
+              <canvas class="piano-roll" data-model="pagct" data-voice="all" aria-label="Piano roll for the PagCT merged transcription"></canvas>
+            </article>
+            <article class="player-row">
+              <div class="player-label">
+                <strong>MuScriptor-medium <a class="model-citation" href="#ref-muscriptor" aria-label="MuScriptor reference 1">[1]</a></strong>
+                <small>Rouard et al., 2026 · zero-shot</small>
+                <dl class="excerpt-scores" aria-label="MuScriptor-medium onset-only note F1 for this excerpt">
+                  <div><dt>F1@50 ms</dt><dd>0.037</dd></div>
+                  <div><dt>F1@100 ms</dt><dd>0.240</dd></div>
+                </dl>
+              </div>
+              <button class="play-button" type="button" data-model="muscriptor_medium" data-voice="all" aria-label="Play the MuScriptor-medium merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
+              <canvas class="piano-roll" data-model="muscriptor_medium" data-voice="all" aria-label="Piano roll for the MuScriptor-medium merged transcription"></canvas>
+            </article>
+            <article class="player-row">
+              <div class="player-label">
+                <strong>Yu &amp; Duan (2024) <a class="model-citation" href="#ref-yu" aria-label="Yu and Duan reference 2">[2]</a></strong>
+                <small>Task-specific · reproduced</small>
+                <dl class="excerpt-scores" aria-label="Yu and Duan onset-only note F1 for this excerpt">
+                  <div><dt>F1@50 ms</dt><dd>0.017</dd></div>
+                  <div><dt>F1@100 ms</dt><dd>0.030</dd></div>
+                </dl>
+              </div>
+              <button class="play-button" type="button" data-model="yu" data-voice="all" aria-label="Play the Yu and Duan merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
+              <canvas class="piano-roll" data-model="yu" data-voice="all" aria-label="Piano roll for the Yu and Duan merged transcription"></canvas>
+            </article>
+
+            <aside class="excerpt-score-guide" aria-label="How to interpret the excerpt scores">
+              <div>
+                <strong>Why can MuScriptor still look plausible?</strong>
+                <p>A 35-second overview compresses a 50–100 ms onset shift to roughly one or two pixels. Note F1 requires an exact-pitch, one-to-one match whose onset falls inside the stated tolerance, so broadly correct pitch contours can coexist with low event scores. MuScriptor's rise from 0.037 at 50 ms to 0.240 at 100 ms is consistent with many timing near-misses; the remaining gap also permits missed, extra, split, or merged notes.</p>
+              </div>
+              <div>
+                <strong>What does the comparison establish?</strong>
+                <p>PagCT is task-specific, whereas MuScriptor-medium is evaluated zero-shot. This excerpt therefore illustrates task-aligned event localization versus out-of-domain generalization—not an architecture comparison under matched training. PagCT is substantially better under this event metric, but its 0.433 F1 also makes clear that the transcription is not error-free. The full YouChorale test-set results in the paper remain the primary quantitative evidence.</p>
+              </div>
+            </aside>
+          </div>
+
+          <div class="listening-block parts-block">
+            <div class="listening-heading">
+              <div><span class="number">2</span><h3>Separate vocal parts</h3></div>
+              <p>Play each PawCT output on its own, or compare it with post-hoc assignment.</p>
+            </div>
+            <div class="comparison-head" aria-hidden="true"><span>Vocal part</span><span>PawCT (Ours) · joint</span><span>Post-VA · two-stage</span></div>
+
+            <article class="part-row" data-part="S">
+              <div class="part-name"><i></i><strong>Soprano</strong><small>S</small></div>
+              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="S" aria-label="Play the PawCT soprano track" disabled><span aria-hidden="true">▶</span><em>Play PawCT soprano</em></button><canvas class="piano-roll" data-model="pawct" data-voice="S" aria-label="Piano roll for the PawCT soprano track"></canvas></div>
+              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="S" aria-label="Play the post-hoc soprano track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc soprano</em></button><canvas class="piano-roll" data-model="postva" data-voice="S" aria-label="Piano roll for the post-hoc soprano track"></canvas></div>
+            </article>
+            <article class="part-row" data-part="A">
+              <div class="part-name"><i></i><strong>Alto</strong><small>A</small></div>
+              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="A" aria-label="Play the PawCT alto track" disabled><span aria-hidden="true">▶</span><em>Play PawCT alto</em></button><canvas class="piano-roll" data-model="pawct" data-voice="A" aria-label="Piano roll for the PawCT alto track"></canvas></div>
+              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="A" aria-label="Play the post-hoc alto track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc alto</em></button><canvas class="piano-roll" data-model="postva" data-voice="A" aria-label="Piano roll for the post-hoc alto track"></canvas></div>
+            </article>
+            <article class="part-row" data-part="T">
+              <div class="part-name"><i></i><strong>Tenor</strong><small>T</small></div>
+              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="T" aria-label="Play the PawCT tenor track" disabled><span aria-hidden="true">▶</span><em>Play PawCT tenor</em></button><canvas class="piano-roll" data-model="pawct" data-voice="T" aria-label="Piano roll for the PawCT tenor track"></canvas></div>
+              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="T" aria-label="Play the post-hoc tenor track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc tenor</em></button><canvas class="piano-roll" data-model="postva" data-voice="T" aria-label="Piano roll for the post-hoc tenor track"></canvas></div>
+            </article>
+            <article class="part-row" data-part="B">
+              <div class="part-name"><i></i><strong>Bass</strong><small>B</small></div>
+              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="B" aria-label="Play the PawCT bass track" disabled><span aria-hidden="true">▶</span><em>Play PawCT bass</em></button><canvas class="piano-roll" data-model="pawct" data-voice="B" aria-label="Piano roll for the PawCT bass track"></canvas></div>
+              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="B" aria-label="Play the post-hoc bass track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc bass</em></button><canvas class="piano-roll" data-model="postva" data-voice="B" aria-label="Piano roll for the post-hoc bass track"></canvas></div>
+            </article>
+          </div>
+
+          <p class="demo-note">The original excerpt is played directly from this page. The ground-truth row is the canonical part-agnostic union of the official SATB annotations for the same 00:10–00:45 passage; it is the scoring reference and therefore has no model score. Every reference or prediction row is synthesized in your browser with the same piano-like timbre. Displayed scores are onset-only, offset-agnostic Note F1 values recomputed directly for this 35-second excerpt using one-to-one note matching against that reference; they are not values quoted from the cited papers or full-test-set averages. MuScriptor-medium was evaluated zero-shot using the official checkpoint; the Yu–Duan output was reproduced from the authors’ released implementation and a frozen checkpoint. Only one player runs at a time; no source MIDI, full annotation file, checkpoint, or probability array is distributed.</p>
+
+          <details class="visual-comparison">
+            <summary>View the full piano-roll comparison</summary>
+            <figure>
+              <a href="assets/exsultate-deo-four-panel.png" aria-label="Open the full-resolution transcription comparison">
+                <img src="assets/exsultate-deo-four-panel.png" alt="Ground truth, PawCT, PagCT, and PagCT plus Post-VA piano rolls for Exsultate Deo." width="3240" height="1152">
+              </a>
+              <figcaption>Ground truth and model outputs for the 10–100 second passage. Color denotes the assigned SATB part.</figcaption>
+            </figure>
+          </details>
+
+          <div class="demo-references" aria-labelledby="demo-references-title">
+            <h3 id="demo-references-title">References</h3>
+            <ol>
+              <li id="ref-muscriptor">S. Rouard, M. Krause, A. Roebel, C.-J. Simon-Gabriel, and A. Défossez, “MuScriptor: An Open Model for Multi-Instrument Music Transcription,” <em>arXiv:2607.08168 [cs.SD]</em>, 2026. <a href="https://doi.org/10.48550/arXiv.2607.08168" target="_blank" rel="noopener noreferrer">Paper <span aria-hidden="true">↗</span></a> · <a href="https://github.com/muscriptor/muscriptor" target="_blank" rel="noopener noreferrer">Code <span aria-hidden="true">↗</span></a> · <a href="https://huggingface.co/MuScriptor/muscriptor-medium" target="_blank" rel="noopener noreferrer">Model <span aria-hidden="true">↗</span></a></li>
+              <li id="ref-yu">H. Yu and Z. Duan, “Note-Level Transcription of Choral Music,” in <em>Proceedings of the 25th International Society for Music Information Retrieval Conference (ISMIR)</em>, pp. 182–188, 2024. <a href="https://doi.org/10.5281/zenodo.14877305" target="_blank" rel="noopener noreferrer">Paper <span aria-hidden="true">↗</span></a> · <a href="https://github.com/ella-granger/NoteTranscription" target="_blank" rel="noopener noreferrer">Code <span aria-hidden="true">↗</span></a></li>
+            </ol>
+          </div>
+        </section>
+
         <section class="section analysis-section" id="analysis" aria-labelledby="analysis-title">
           <p class="eyebrow">Error analysis</p>
           <h2 id="analysis-title" class="section-heading">Why general-purpose transcription falls short on choir</h2>
@@ -150,7 +298,7 @@
               <article><strong>Onsets and Frames</strong><p>High precision but low recall indicates conservative detection and many missed notes in dense vocal mixtures.</p></article>
               <article><strong>MT3</strong><p>Generic sequence transcription transfers weakly to precise choral note boundaries.</p></article>
               <article><strong>YourMT3+</strong><p>Its improved frame recall does not translate into improved 50-ms note F1, showing that activity coverage alone is insufficient.</p></article>
-              <article><strong>Yu et al.</strong><p>The strongest task-relevant baseline, but PagCT improves both note precision and recall rather than trading one for the other.</p></article>
+              <article><strong>Yu &amp; Duan (2024) <a class="model-citation" href="#ref-yu" aria-label="Yu and Duan reference 2">[2]</a></strong><p>The strongest task-relevant baseline, but PagCT improves both note precision and recall rather than trading one for the other.</p></article>
               <article><strong>Without augmentation</strong><p>Frame F1 is slightly higher, while note F1 is lower at both tolerances—direct evidence that frame occupancy cannot replace event-level evaluation.</p></article>
             </div>
           </details>
@@ -210,146 +358,6 @@
             <strong>Interpretation, not overclaim.</strong>
             <p>The measurements directly support a frame-to-event localization gap. Soft vocal attacks, legato singing, a long-tailed training distribution, and MuScriptor's generic MIDI-token representation are plausible contributors rather than independently proven causal effects. MuScriptor's own <a href="https://arxiv.org/abs/2607.08168" target="_blank" rel="noopener noreferrer">paper</a> and <a href="https://huggingface.co/MuScriptor/muscriptor-medium" target="_blank" rel="noopener noreferrer">model card</a> similarly report weaker onset/offset precision for choral music. MuScriptor-medium is evaluated here zero-shot.</p>
           </aside>
-        </section>
-
-        <section class="section demo-section" id="demo" aria-labelledby="demo-title">
-          <h2 id="demo-title" class="section-heading">Listen to the transcription</h2>
-          <p class="section-intro">This 35-second excerpt of <em>Exsultate Deo</em> lets you compare the part-agnostic ground truth with merged predictions from PagCT, MuScriptor-medium, and Yu et al. PawCT additionally returns four independently playable vocal parts.</p>
-
-          <div class="waveform-player" data-waveform-player>
-            <div class="waveform-copy">
-              <div>
-                <strong>Original recording</strong>
-                <span>Palestrina · <em>Exsultate Deo</em> · 00:10–00:45</span>
-              </div>
-              <span class="local-audio-label">35-second on-page excerpt</span>
-            </div>
-            <div class="waveform-controls">
-              <button class="waveform-play" type="button" data-original-play aria-label="Play the original recording">
-                <span aria-hidden="true">▶</span>
-              </button>
-              <div class="waveform-track">
-                <canvas id="original-waveform" aria-hidden="true"></canvas>
-                <input id="original-scrubber" class="waveform-scrubber" type="range" min="0" max="35" step="0.01" value="0" aria-label="Seek through the original recording">
-                <span class="waveform-loading" data-waveform-status>Preparing waveform…</span>
-              </div>
-              <output class="waveform-time" for="original-scrubber" data-waveform-time>0:00 / 0:35</output>
-            </div>
-            <audio id="original-recording" class="source-audio-element" preload="metadata" src="assets/audio/exsultate-deo-10s-45s.mp3"></audio>
-            <div class="waveform-footnote">
-              <span>The audio stays on this page—click the waveform to seek.</span>
-              <a href="https://www.youtube.com/watch?v=jd2_r4PK5dc" target="_blank" rel="noopener noreferrer">Recording source and attribution <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-
-          <p class="demo-status" id="demo-status" role="status">Loading the reference and model outputs…</p>
-
-          <div class="listening-block">
-            <div class="listening-heading">
-              <div><span class="number">1</span><h3>Merged transcription</h3></div>
-              <p>All annotated or detected notes share one track.</p>
-            </div>
-            <article class="player-row">
-              <div class="player-label">
-                <strong>Ground truth</strong>
-                <small>Reference · merged note track</small>
-                <dl class="excerpt-scores reference-scores" aria-label="Ground truth is the scoring reference and has no model score">
-                  <div><dt>F1@50 ms</dt><dd aria-label="Not applicable">—</dd></div>
-                  <div><dt>F1@100 ms</dt><dd aria-label="Not applicable">—</dd></div>
-                </dl>
-              </div>
-              <button class="play-button" type="button" data-model="reference" data-voice="all" aria-label="Play the ground-truth reference merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
-              <canvas class="piano-roll" data-model="reference" data-voice="all" aria-label="Piano roll for the ground-truth reference merged transcription"></canvas>
-            </article>
-            <article class="player-row pagct-row">
-              <div class="player-label">
-                <strong>PagCT</strong>
-                <small>Single note track</small>
-                <dl class="excerpt-scores" aria-label="PagCT onset-only note F1 for this excerpt">
-                  <div><dt>F1@50 ms</dt><dd>0.433</dd></div>
-                  <div><dt>F1@100 ms</dt><dd>0.668</dd></div>
-                </dl>
-              </div>
-              <button class="play-button" type="button" data-model="pagct" data-voice="all" aria-label="Play the PagCT merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
-              <canvas class="piano-roll" data-model="pagct" data-voice="all" aria-label="Piano roll for the PagCT merged transcription"></canvas>
-            </article>
-            <article class="player-row">
-              <div class="player-label">
-                <strong>MuScriptor-medium</strong>
-                <small>Zero-shot · merged note track</small>
-                <dl class="excerpt-scores" aria-label="MuScriptor-medium onset-only note F1 for this excerpt">
-                  <div><dt>F1@50 ms</dt><dd>0.037</dd></div>
-                  <div><dt>F1@100 ms</dt><dd>0.240</dd></div>
-                </dl>
-              </div>
-              <button class="play-button" type="button" data-model="muscriptor_medium" data-voice="all" aria-label="Play the MuScriptor-medium merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
-              <canvas class="piano-roll" data-model="muscriptor_medium" data-voice="all" aria-label="Piano roll for the MuScriptor-medium merged transcription"></canvas>
-            </article>
-            <article class="player-row">
-              <div class="player-label">
-                <strong>Yu et al.</strong>
-                <small>Task-specific · merged note track</small>
-                <dl class="excerpt-scores" aria-label="Yu et al. onset-only note F1 for this excerpt">
-                  <div><dt>F1@50 ms</dt><dd>0.017</dd></div>
-                  <div><dt>F1@100 ms</dt><dd>0.030</dd></div>
-                </dl>
-              </div>
-              <button class="play-button" type="button" data-model="yu" data-voice="all" aria-label="Play the Yu et al. merged transcription" disabled><span aria-hidden="true">▶</span><em>Play</em></button>
-              <canvas class="piano-roll" data-model="yu" data-voice="all" aria-label="Piano roll for the Yu et al. merged transcription"></canvas>
-            </article>
-
-            <aside class="excerpt-score-guide" aria-label="How to interpret the excerpt scores">
-              <div>
-                <strong>Why can MuScriptor still look plausible?</strong>
-                <p>A 35-second overview compresses a 50–100 ms onset shift to roughly one or two pixels. Note F1 requires an exact-pitch, one-to-one match whose onset falls inside the stated tolerance, so broadly correct pitch contours can coexist with low event scores. MuScriptor's rise from 0.037 at 50 ms to 0.240 at 100 ms is consistent with many timing near-misses; the remaining gap also permits missed, extra, split, or merged notes.</p>
-              </div>
-              <div>
-                <strong>What does the comparison establish?</strong>
-                <p>PagCT is task-specific, whereas MuScriptor-medium is evaluated zero-shot. This excerpt therefore illustrates task-aligned event localization versus out-of-domain generalization—not an architecture comparison under matched training. PagCT is substantially better under this event metric, but its 0.433 F1 also makes clear that the transcription is not error-free. The full YouChorale test-set results in the paper remain the primary quantitative evidence.</p>
-              </div>
-            </aside>
-          </div>
-
-          <div class="listening-block parts-block">
-            <div class="listening-heading">
-              <div><span class="number">2</span><h3>Separate vocal parts</h3></div>
-              <p>Play each PawCT output on its own, or compare it with post-hoc assignment.</p>
-            </div>
-            <div class="comparison-head" aria-hidden="true"><span>Vocal part</span><span>PawCT · joint</span><span>Post-VA · two-stage</span></div>
-
-            <article class="part-row" data-part="S">
-              <div class="part-name"><i></i><strong>Soprano</strong><small>S</small></div>
-              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="S" aria-label="Play the PawCT soprano track" disabled><span aria-hidden="true">▶</span><em>Play PawCT soprano</em></button><canvas class="piano-roll" data-model="pawct" data-voice="S" aria-label="Piano roll for the PawCT soprano track"></canvas></div>
-              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="S" aria-label="Play the post-hoc soprano track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc soprano</em></button><canvas class="piano-roll" data-model="postva" data-voice="S" aria-label="Piano roll for the post-hoc soprano track"></canvas></div>
-            </article>
-            <article class="part-row" data-part="A">
-              <div class="part-name"><i></i><strong>Alto</strong><small>A</small></div>
-              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="A" aria-label="Play the PawCT alto track" disabled><span aria-hidden="true">▶</span><em>Play PawCT alto</em></button><canvas class="piano-roll" data-model="pawct" data-voice="A" aria-label="Piano roll for the PawCT alto track"></canvas></div>
-              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="A" aria-label="Play the post-hoc alto track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc alto</em></button><canvas class="piano-roll" data-model="postva" data-voice="A" aria-label="Piano roll for the post-hoc alto track"></canvas></div>
-            </article>
-            <article class="part-row" data-part="T">
-              <div class="part-name"><i></i><strong>Tenor</strong><small>T</small></div>
-              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="T" aria-label="Play the PawCT tenor track" disabled><span aria-hidden="true">▶</span><em>Play PawCT tenor</em></button><canvas class="piano-roll" data-model="pawct" data-voice="T" aria-label="Piano roll for the PawCT tenor track"></canvas></div>
-              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="T" aria-label="Play the post-hoc tenor track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc tenor</em></button><canvas class="piano-roll" data-model="postva" data-voice="T" aria-label="Piano roll for the post-hoc tenor track"></canvas></div>
-            </article>
-            <article class="part-row" data-part="B">
-              <div class="part-name"><i></i><strong>Bass</strong><small>B</small></div>
-              <div class="mini-player"><button class="play-button compact" type="button" data-model="pawct" data-voice="B" aria-label="Play the PawCT bass track" disabled><span aria-hidden="true">▶</span><em>Play PawCT bass</em></button><canvas class="piano-roll" data-model="pawct" data-voice="B" aria-label="Piano roll for the PawCT bass track"></canvas></div>
-              <div class="mini-player baseline"><button class="play-button compact" type="button" data-model="postva" data-voice="B" aria-label="Play the post-hoc bass track" disabled><span aria-hidden="true">▶</span><em>Play post-hoc bass</em></button><canvas class="piano-roll" data-model="postva" data-voice="B" aria-label="Piano roll for the post-hoc bass track"></canvas></div>
-            </article>
-          </div>
-
-          <p class="demo-note">The original excerpt is played directly from this page. The ground-truth row is the canonical part-agnostic union of the official SATB annotations for the same 00:10–00:45 passage; it is the scoring reference and therefore has no model score. Every reference or prediction row is synthesized in your browser with the same piano-like timbre. Displayed scores are onset-only, offset-agnostic Note F1 values recomputed directly for this 35-second excerpt using one-to-one note matching against that reference; they are not full-test-set averages. MuScriptor-medium is evaluated zero-shot; the Yu et al. row is a newly generated full-song inference from the frozen checkpoint associated with the reported baseline, not a historical per-song artifact. Only one player runs at a time; no source MIDI, full annotation file, checkpoint, or probability array is distributed.</p>
-
-          <details class="visual-comparison">
-            <summary>View the full piano-roll comparison</summary>
-            <figure>
-              <a href="assets/exsultate-deo-four-panel.png" aria-label="Open the full-resolution transcription comparison">
-                <img src="assets/exsultate-deo-four-panel.png" alt="Ground truth, PawCT, PagCT, and PagCT plus Post-VA piano rolls for Exsultate Deo." width="3240" height="1152">
-              </a>
-              <figcaption>Ground truth and model outputs for the 10–100 second passage. Color denotes the assigned SATB part.</figcaption>
-            </figure>
-          </details>
         </section>
 
         <section class="section citation-section" id="citation" hidden aria-hidden="true" data-status="TBD">

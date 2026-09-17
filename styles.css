@@ -161,6 +161,9 @@ figcaption { color: var(--muted); font-size: 13px; }
 .player-row + .player-row { border-top: 0; }
 .player-label strong, .player-label small { display: block; }
 .player-label small { color: var(--muted); font-size: 11px; }
+.ours-tag { display: inline-block; margin-left: 4px; padding: 2px 5px; color: #fff; background: var(--blue); border-radius: 2px; font-size: 8px; font-weight: 750; letter-spacing: .045em; line-height: 1; text-transform: uppercase; vertical-align: 2px; }
+.model-citation { color: var(--blue); font-size: .78em; font-weight: 650; text-decoration: none; vertical-align: .18em; }
+.model-citation:hover, .model-citation:focus { text-decoration: underline; }
 .excerpt-scores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; margin: 8px 0 0; }
 .excerpt-scores div { min-width: 0; padding: 5px 6px 4px; background: #f3f6f8; border: 1px solid #e5e9ec; border-radius: 2px; }
 .excerpt-scores dt { color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: .015em; line-height: 1.2; white-space: nowrap; }
@@ -199,6 +202,12 @@ figcaption { color: var(--muted); font-size: 13px; }
 .visual-comparison a { border: 1px solid var(--line); }
 .visual-comparison img { height: auto; }
 .visual-comparison figcaption { padding-top: 9px; }
+.demo-references { margin-top: 24px; padding-top: 17px; border-top: 1px solid var(--line); }
+.demo-references h3 { margin: 0 0 9px; font-size: 14px; }
+.demo-references ol { margin: 0; padding-left: 21px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.demo-references li + li { margin-top: 6px; }
+.demo-references a { font-weight: 650; text-decoration: none; }
+.demo-references a:hover, .demo-references a:focus { text-decoration: underline; }
 
 .method-figure { margin-top: 28px; }
 .method-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
@@ -239,7 +248,6 @@ footer { padding: 26px 0; color: var(--muted); border-top: 1px solid var(--line)
   .page { width: min(100% - 28px, 860px); }
   .nav-inner { align-items: flex-start; padding-block: 14px; }
   .nav-links { justify-content: flex-end; gap: 7px 13px; }
-  .nav-links a:nth-child(4) { display: none; }
   h1 { font-size: 37px; }
   .standfirst { font-size: 17px; }
   .section { padding: 46px 0; }
