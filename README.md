@@ -15,10 +15,13 @@ visitors do not need to leave the demo to hear it.
 
 ## Scientific status
 
-The displayed metrics are manuscript-reported values, not results regenerated
-from this demo repository. Read [the reproducibility audit](REPRODUCIBILITY.md)
-before citing them. The accompanying implementation repository is currently
-access-controlled while its experiment provenance is being frozen.
+The headline and aggregate metrics are manuscript-reported values, not results
+regenerated from this demo repository. The listening rows additionally show
+onset-only Note F1 at 50 and 100 ms, recomputed from the shipped 35-second
+reference and prediction events; these excerpt-level values are illustrative
+and are not full-test-set averages. Read [the reproducibility audit](REPRODUCIBILITY.md)
+before citing any result. The accompanying implementation repository is
+currently access-controlled while its experiment provenance is being frozen.
 
 ## Contents
 

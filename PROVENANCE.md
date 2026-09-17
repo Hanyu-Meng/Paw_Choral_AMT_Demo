@@ -44,6 +44,13 @@
   stitching, and then the same overlap-and-clip rule. The canonical
   excerpt-event SHA-256 is
   `d0eb258196e1da621d6e7b7284343c871afa605a5bd747841453c092ad1c7f11`.
+- The listening rows report onset-only, offset-agnostic Note F1 calculated from
+  the shipped 35-second canonical reference and cached predictions using
+  exact-pitch, one-to-one note matching. PagCT scores `0.433382` at 50 ms and
+  `0.667643` at 100 ms; MuScriptor-medium scores `0.037190` and `0.239669`;
+  Yu et al. scores `0.017316` and `0.030303`. The ground-truth row is the
+  scoring reference and is not assigned a model score. These are excerpt-level
+  diagnostics rather than full-test-set averages.
 - Baseline and case-study figures were generated from the manuscript table,
   audited MuScriptor aggregate and per-recording metrics, and cached symbolic
   outputs. Diagnostic nearest-onset pairing is explicitly distinguished from

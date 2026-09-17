@@ -157,10 +157,19 @@ figcaption { color: var(--muted); font-size: 13px; }
 .listening-heading p { margin: 0; color: var(--muted); font-size: 12px; text-align: right; }
 .number { display: grid; place-items: center; width: 23px; height: 23px; color: #fff; background: #303236; border-radius: 50%; font-size: 11px; font-weight: 750; }
 .player-row, .part-row { border: 1px solid var(--line); background: #fff; }
-.player-row { min-height: 96px; display: grid; grid-template-columns: 142px 50px 1fr; align-items: center; gap: 14px; padding: 14px 16px; }
+.player-row { min-height: 112px; display: grid; grid-template-columns: 184px 50px 1fr; align-items: center; gap: 14px; padding: 14px 16px; }
 .player-row + .player-row { border-top: 0; }
 .player-label strong, .player-label small { display: block; }
 .player-label small { color: var(--muted); font-size: 11px; }
+.excerpt-scores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; margin: 8px 0 0; }
+.excerpt-scores div { min-width: 0; padding: 5px 6px 4px; background: #f3f6f8; border: 1px solid #e5e9ec; border-radius: 2px; }
+.excerpt-scores dt { color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: .015em; line-height: 1.2; white-space: nowrap; }
+.excerpt-scores dd { margin: 2px 0 0; color: var(--ink); font-size: 14px; font-variant-numeric: tabular-nums; font-weight: 700; line-height: 1.1; }
+.reference-scores dd { color: var(--muted); }
+.excerpt-score-guide { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 12px; background: var(--line); border: 1px solid var(--line); }
+.excerpt-score-guide div { padding: 16px 17px; background: #f7f9fa; }
+.excerpt-score-guide strong { display: block; margin-bottom: 5px; color: var(--blue-dark); font-size: 12px; }
+.excerpt-score-guide p { margin: 0; color: #525961; font-size: 11px; line-height: 1.55; }
 .play-button { display: grid; place-items: center; width: 38px; height: 38px; padding: 0 0 0 2px; color: var(--ink); background: #fff; border: 1px solid #babdc1; border-radius: 50%; cursor: pointer; }
 .play-button:hover:not(:disabled), .play-button:focus:not(:disabled) { color: var(--blue); border-color: var(--blue); }
 .play-button:disabled { cursor: wait; opacity: .45; }
@@ -219,6 +228,7 @@ footer { padding: 26px 0; color: var(--muted); border-top: 1px solid var(--line)
   .analysis-subhead { align-items: flex-start; flex-direction: column; gap: 9px; }
   .analysis-subhead > p { max-width: none; text-align: left; }
   .interpretation-note { grid-template-columns: 1fr; gap: 7px; }
+  .excerpt-score-guide { grid-template-columns: 1fr; }
   .comparison-head, .part-row { grid-template-columns: 90px minmax(0, 1fr) minmax(0, 1fr); }
   .part-name { gap: 7px; padding-inline: 9px; }
   .mini-player { grid-template-columns: 32px 1fr; gap: 6px; padding-inline: 8px; }
