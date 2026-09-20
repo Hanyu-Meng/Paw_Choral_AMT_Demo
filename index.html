@@ -333,61 +333,14 @@
         <section class="section analysis-section" id="analysis" aria-labelledby="analysis-title">
           <p class="eyebrow">Error analysis</p>
           <h2 id="analysis-title" class="section-heading">Why general-purpose transcription falls short on choir</h2>
-          <p class="section-intro">The central difficulty is not merely detecting which pitches are active. It is turning sustained vocal activity into correctly localized note events.</p>
-
-          <div class="analysis-verdict">
-            <div>
-              <span class="verdict-label">The revealing comparison</span>
-              <strong>Similar frame F1, 4.55× note F1</strong>
-              <p>MuScriptor-medium and PagCT are nearly tied at the frame level (0.730 vs. 0.738), but PagCT reaches 0.382 note F1 at 50 ms, compared with 0.084 for MuScriptor.</p>
-            </div>
-            <dl>
-              <div><dt>MuScriptor retention</dt><dd>11.5%</dd></div>
-              <div><dt>PagCT retention</dt><dd>51.8%</dd></div>
-              <div><dt>Note-count ratio</dt><dd>1.018</dd></div>
-            </dl>
-          </div>
+          <p class="section-intro">MuScriptor-medium and PagCT achieve similar frame F1 (0.730 vs. 0.738), but PagCT obtains substantially higher 50-ms note F1 (0.382 vs. 0.084). This suggests that the main gap lies in localizing note events precisely rather than detecting sustained pitch activity.</p>
 
           <figure class="analysis-figure wide-figure">
             <a href="assets/analysis/baseline-frame-event-gap.png" aria-label="Open the aggregate baseline analysis at full resolution">
               <img src="assets/analysis/baseline-frame-event-gap.png" alt="Comparison of frame F1 and note F1 for all baselines, highlighting MuScriptor's large frame-to-event drop." width="2859" height="1142" loading="lazy">
             </a>
-            <figcaption>Frame accuracy does not guarantee event accuracy. The frame-to-event retention ratio is descriptive rather than a standard evaluation metric.</figcaption>
+            <figcaption>Strong frame-level pitch tracking does not necessarily translate into accurately localized note events.</figcaption>
           </figure>
-
-          <div class="evidence-grid">
-            <article>
-              <span>01</span>
-              <h3>Not simply a pitch-detection failure</h3>
-              <p>Across 30 recordings, MuScriptor's median predicted/reference note-count ratio is 1.018. Its low note score is therefore not explained by a global tendency to emit far too many or too few notes.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Strong tolerance sensitivity</h3>
-              <p>MuScriptor improves from 0.084 at 50 ms to 0.231 at 100 ms. This recovery is consistent with imprecise onset localization, although the residual gap indicates additional segmentation errors.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Scale alone does not solve it</h3>
-              <p>On the same audited evaluation, MuScriptor-medium outperforms MuScriptor-large at both 50 and 100 ms. Task-aligned boundary modeling matters more here than simply increasing general-purpose model size.</p>
-            </article>
-          </div>
-
-          <details class="baseline-notes">
-            <summary>Why the other baselines fall short</summary>
-            <div class="baseline-note-grid">
-              <article><strong>Onsets and Frames</strong><p>High precision but low recall indicates conservative detection and many missed notes in dense vocal mixtures.</p></article>
-              <article><strong>MT3</strong><p>Generic sequence transcription transfers weakly to precise choral note boundaries.</p></article>
-              <article><strong>YourMT3+</strong><p>Its improved frame recall does not translate into improved 50-ms note F1, showing that activity coverage alone is insufficient.</p></article>
-              <article><strong>Yu &amp; Duan (2024) <a class="model-citation" href="#ref-yu" aria-label="Yu and Duan reference 2">[2]</a></strong><p>The strongest task-relevant baseline, but PagCT improves both note precision and recall rather than trading one for the other.</p></article>
-              <article><strong>Without augmentation</strong><p>Frame F1 is slightly higher, while note F1 is lower at both tolerances—direct evidence that frame occupancy cannot replace event-level evaluation.</p></article>
-            </div>
-          </details>
-
-          <aside class="interpretation-note">
-            <strong>Interpretation, not overclaim.</strong>
-            <p>The measurements directly support a frame-to-event localization gap. Soft vocal attacks, legato singing, a long-tailed training distribution, and MuScriptor's generic MIDI-token representation are plausible contributors rather than independently proven causal effects. MuScriptor's own <a href="https://arxiv.org/abs/2607.08168" target="_blank" rel="noopener noreferrer">paper</a> and <a href="https://huggingface.co/MuScriptor/muscriptor-medium" target="_blank" rel="noopener noreferrer">model card</a> similarly report weaker onset/offset precision for choral music. MuScriptor-medium is evaluated here using the released general-purpose checkpoint.</p>
-          </aside>
         </section>
 
         <section class="section citation-section" id="citation" hidden aria-hidden="true" data-status="TBD">
