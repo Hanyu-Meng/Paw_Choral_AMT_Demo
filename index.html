@@ -87,16 +87,15 @@
               <div class="bar-row ours"><span>PawCT-OC</span><i style="--value: 100%"></i><b>0.225</b></div>
             </figure>
           </div>
-          <p class="fine-print">Note F1 uses a 50 ms onset tolerance. Expand the tables below for the complete paper results; bold and underlined values mark the best and second-best results, respectively.</p>
+          <p class="fine-print">Bold: best. Underlined: second best.</p>
 
           <div class="paper-results" aria-label="Full results from the paper">
             <h3>Full paper results</h3>
 
-            <details class="result-table-panel" open>
-              <summary>Table 1 · Part-agnostic transcription on YouChorale</summary>
+            <section class="result-table-block">
+              <h4>Table 1 · Part-agnostic transcription on YouChorale</h4>
               <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable part-agnostic results table">
-                <table class="result-table result-table-wide">
-                  <caption>Frame-level and note-level precision, recall, and F1 on the YouChorale test set. Note metrics use onset tolerances of 50 and 100 ms.</caption>
+                <table class="result-table result-table-wide" aria-label="Part-agnostic transcription results on YouChorale">
                   <thead>
                     <tr>
                       <th rowspan="2" scope="col">Model</th>
@@ -118,17 +117,16 @@
                     <tr><th scope="row">MuScriptor-medium</th><td>307M</td><td>0.720</td><td>0.745</td><td>0.730</td><td>0.086</td><td>0.083</td><td>0.084</td><td>0.236</td><td>0.228</td><td>0.231</td></tr>
                     <tr><th scope="row">Yu et al.</th><td>4.23M</td><td>0.678</td><td>0.619</td><td>0.647</td><td>0.251</td><td>0.232</td><td>0.237</td><td>0.366</td><td>0.341</td><td>0.347</td></tr>
                     <tr class="proposed-row"><th scope="row">PagCT w/o Aug.</th><td>14.84M</td><td><u>0.690</u></td><td><u>0.833</u></td><td><strong>0.751</strong></td><td>0.346</td><td>0.329</td><td>0.333</td><td>0.539</td><td>0.506</td><td>0.516</td></tr>
-                    <tr class="proposed-row"><th scope="row">PagCT <span class="table-ours">Ours</span></th><td>14.84M</td><td>0.626</td><td><strong>0.909</strong></td><td><u>0.738</u></td><td><u>0.398</u></td><td><strong>0.378</strong></td><td><strong>0.382</strong></td><td><u>0.597</u></td><td><strong>0.569</strong></td><td><strong>0.573</strong></td></tr>
+                    <tr class="proposed-row"><th scope="row">PagCT</th><td>14.84M</td><td>0.626</td><td><strong>0.909</strong></td><td><u>0.738</u></td><td><u>0.398</u></td><td><strong>0.378</strong></td><td><strong>0.382</strong></td><td><u>0.597</u></td><td><strong>0.569</strong></td><td><strong>0.573</strong></td></tr>
                   </tbody>
                 </table>
               </div>
-            </details>
+            </section>
 
-            <details class="result-table-panel">
-              <summary>Table 2 · Part-aware SATB transcription on YouChorale</summary>
+            <section class="result-table-block">
+              <h4>Table 2 · Part-aware SATB transcription on YouChorale · Note F1 @ 50 ms</h4>
               <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable part-aware SATB results table">
-                <table class="result-table result-table-extra-wide">
-                  <caption>Frame F1 and 50-ms onset F1 for each SATB part, their macro-average, and the voice-assignment (VA) rate. A star marks baselines adapted for part-aware transcription.</caption>
+                <table class="result-table result-table-extra-wide" aria-label="Part-aware SATB transcription results on YouChorale">
                   <thead>
                     <tr>
                       <th rowspan="2" scope="col">Model</th>
@@ -145,29 +143,28 @@
                     <tr class="proposed-row"><th scope="row">PawCT w/o union-loss</th><td>0.417</td><td>0.192</td><td>0.338</td><td>0.169</td><td>0.343</td><td>0.178</td><td>0.419</td><td>0.222</td><td>0.379</td><td>0.190</td><td>51.36</td><td>49.74</td></tr>
                     <tr class="proposed-row"><th scope="row">PawCT</th><td>0.530</td><td><u>0.228</u></td><td>0.430</td><td><u>0.191</u></td><td>0.429</td><td><u>0.197</u></td><td>0.552</td><td><u>0.252</u></td><td>0.458</td><td><u>0.217</u></td><td>62.06</td><td>56.81</td></tr>
                     <tr class="proposed-row"><th scope="row">PawCT-RP</th><td><strong>0.542</strong></td><td>0.210</td><td><strong>0.453</strong></td><td>0.185</td><td><strong>0.458</strong></td><td>0.194</td><td><strong>0.585</strong></td><td>0.247</td><td><strong>0.510</strong></td><td>0.209</td><td>69.11</td><td>54.71</td></tr>
-                    <tr class="proposed-row"><th scope="row">PawCT-RP-OC <span class="table-ours">Full</span></th><td><u>0.535</u></td><td><strong>0.231</strong></td><td>0.447</td><td><strong>0.197</strong></td><td><u>0.451</u></td><td><strong>0.208</strong></td><td><u>0.578</u></td><td><strong>0.264</strong></td><td><u>0.503</u></td><td><strong>0.225</strong></td><td>68.16</td><td>58.90</td></tr>
+                    <tr class="proposed-row"><th scope="row">PawCT-RP-OC</th><td><u>0.535</u></td><td><strong>0.231</strong></td><td>0.447</td><td><strong>0.197</strong></td><td><u>0.451</u></td><td><strong>0.208</strong></td><td><u>0.578</u></td><td><strong>0.264</strong></td><td><u>0.503</u></td><td><strong>0.225</strong></td><td>68.16</td><td>58.90</td></tr>
                   </tbody>
                 </table>
               </div>
-            </details>
+            </section>
 
-            <details class="result-table-panel">
-              <summary>Table 3 · Cross-dataset part-aware transcription</summary>
+            <section class="result-table-block">
+              <h4>Table 3 · Cross-dataset part-aware note F1 @ 50 ms</h4>
               <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable cross-dataset results table">
-                <table class="result-table result-table-compact">
-                  <caption>Part-aware note F1 at a 50-ms onset tolerance. Models are trained only on YouChorale and evaluated without target-domain fine-tuning or threshold tuning.</caption>
+                <table class="result-table result-table-compact" aria-label="Cross-dataset part-aware transcription results">
                   <thead><tr><th scope="col">Dataset</th><th scope="col">Model</th><th scope="col">Soprano</th><th scope="col">Alto</th><th scope="col">Tenor</th><th scope="col">Bass</th><th scope="col">Average</th></tr></thead>
                   <tbody>
                     <tr><th rowspan="3" scope="rowgroup">CSD<br><small>n = 3</small></th><th scope="row">PagCT + Post-VA</th><td>0.073</td><td>0.122</td><td>0.131</td><td>0.143</td><td>0.118</td></tr>
                     <tr class="proposed-row"><th scope="row">PawCT</th><td>0.140</td><td>0.175</td><td>0.183</td><td><strong>0.145</strong></td><td>0.172</td></tr>
-                    <tr class="proposed-row"><th scope="row">PawCT-RP-OC <span class="table-ours">Full</span></th><td><strong>0.145</strong></td><td><strong>0.223</strong></td><td><strong>0.199</strong></td><td>0.130</td><td><strong>0.174</strong></td></tr>
+                    <tr class="proposed-row"><th scope="row">PawCT-RP-OC</th><td><strong>0.145</strong></td><td><strong>0.223</strong></td><td><strong>0.199</strong></td><td>0.130</td><td><strong>0.174</strong></td></tr>
                     <tr class="dataset-divider"><th rowspan="3" scope="rowgroup">Cantoría<br><small>n = 14</small></th><th scope="row">PagCT + Post-VA</th><td>0.179</td><td>0.115</td><td>0.085</td><td>0.084</td><td>0.115</td></tr>
                     <tr class="proposed-row"><th scope="row">PawCT</th><td>0.240</td><td>0.239</td><td>0.275</td><td>0.328</td><td>0.271</td></tr>
-                    <tr class="proposed-row"><th scope="row">PawCT-RP-OC <span class="table-ours">Full</span></th><td><strong>0.329</strong></td><td><strong>0.273</strong></td><td><strong>0.300</strong></td><td><strong>0.348</strong></td><td><strong>0.313</strong></td></tr>
+                    <tr class="proposed-row"><th scope="row">PawCT-RP-OC</th><td><strong>0.329</strong></td><td><strong>0.273</strong></td><td><strong>0.300</strong></td><td><strong>0.348</strong></td><td><strong>0.313</strong></td></tr>
                   </tbody>
                 </table>
               </div>
-            </details>
+            </section>
           </div>
         </section>
 
