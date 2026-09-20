@@ -303,57 +303,6 @@
             </div>
           </details>
 
-          <div class="analysis-subhead">
-            <div>
-              <p class="eyebrow">All 30 test recordings</p>
-              <h3>Where MuScriptor fails</h3>
-            </div>
-            <p>The recording-level view prevents the interpretation from resting on a single favorable excerpt.</p>
-          </div>
-          <figure class="analysis-figure wide-figure">
-            <a href="assets/analysis/muscriptor-recording-failure-map.png" aria-label="Open the recording-level MuScriptor failure map at full resolution">
-              <img src="assets/analysis/muscriptor-recording-failure-map.png" alt="Recording-level scatter plots comparing MuScriptor frame F1, note F1, tolerance recovery, and predicted note count." width="2729" height="1092" loading="lazy">
-            </a>
-            <figcaption>Three mechanically selected recordings expose distinct failure patterns rather than one universal explanation.</figcaption>
-          </figure>
-
-          <div class="case-grid">
-            <article><span>Extreme frame/event gap</span><strong>0m6D6hvYoFQ</strong><p>Frame F1 is 0.861, while note F1 is only 0.010 at 50 ms. Much of the sustained pitch activity is correct, but almost none of the events are localized precisely.</p></article>
-            <article><span>Tolerance-sensitive timing</span><strong>SeBQqa0MhRo</strong><p>Note F1 rises from 0.161 at 50 ms to 0.575 at 100 ms, consistent with many near-correct but insufficiently precise onsets.</p></article>
-            <article><span>Residual segmentation errors</span><strong>jd2_r4PK5dc</strong><p>Note F1 rises from 0.052 to 0.224, but remains low at 100 ms; timing error alone cannot explain the missed, extra, merged, or fragmented notes.</p></article>
-          </div>
-
-          <figure class="analysis-figure wide-figure">
-            <a href="assets/analysis/jd2-symbolic-case-study.png" aria-label="Open the symbolic case study at full resolution">
-              <img src="assets/analysis/jd2-symbolic-case-study.png" alt="Aligned piano rolls for the reference, MuScriptor-medium, PagCT, and PawCT over an eight-second Exsultate Deo phrase." width="2905" height="1626" loading="lazy">
-            </a>
-            <figcaption>The eight-second window was selected deterministically among windows with at least 20 reference notes. Demo decodes are illustrative and are not aggregate Table 1 scores.</figcaption>
-          </figure>
-
-          <details class="diagnostic-details">
-            <summary>View the onset-error diagnostic</summary>
-            <figure class="analysis-figure">
-              <a href="assets/analysis/muscriptor-onset-error-cases.png" aria-label="Open the onset-error diagnostic at full resolution">
-                <img src="assets/analysis/muscriptor-onset-error-cases.png" alt="Empirical cumulative distributions of descriptive same-pitch onset errors for three MuScriptor case studies." width="2859" height="944" loading="lazy">
-              </a>
-              <figcaption>This nearest, unique, same-pitch pairing is a diagnostic visualization, not the official note-matching metric.</figcaption>
-            </figure>
-          </details>
-
-          <div class="analysis-subhead ablation-heading">
-            <div>
-              <p class="eyebrow">Part-aware ablation</p>
-              <h3>Why joint transcription and assignment help</h3>
-            </div>
-            <p>Union supervision improves the shared acoustic task, while ordered continuity recovers note-level consistency that pitch range alone does not provide.</p>
-          </div>
-          <figure class="analysis-figure wide-figure">
-            <a href="assets/analysis/part-aware-ablation-story.png" aria-label="Open the part-aware ablation analysis at full resolution">
-              <img src="assets/analysis/part-aware-ablation-story.png" alt="Part-aware frame and note F1 ablations, including union supervision, range prior, ordered continuity, and post-hoc assignment." width="2833" height="1118" loading="lazy">
-            </a>
-            <figcaption>PawCT-OC improves note F1 by 28.6% over Post-VA, supporting joint acoustic transcription and voice assignment instead of assigning parts afterwards.</figcaption>
-          </figure>
-
           <aside class="interpretation-note">
             <strong>Interpretation, not overclaim.</strong>
             <p>The measurements directly support a frame-to-event localization gap. Soft vocal attacks, legato singing, a long-tailed training distribution, and MuScriptor's generic MIDI-token representation are plausible contributors rather than independently proven causal effects. MuScriptor's own <a href="https://arxiv.org/abs/2607.08168" target="_blank" rel="noopener noreferrer">paper</a> and <a href="https://huggingface.co/MuScriptor/muscriptor-medium" target="_blank" rel="noopener noreferrer">model card</a> similarly report weaker onset/offset precision for choral music. MuScriptor-medium is evaluated here using the released general-purpose checkpoint.</p>
